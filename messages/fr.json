@@ -155,7 +155,9 @@
     "nav": {
       "dashboard": "Tableau de bord",
       "orders": "Commandes",
-      "scan": "Scanner"
+      "scan": "Scanner",
+      "users": "Utilisateurs",
+      "catalog": "Catalogue"
     },
     "orders": {
       "title": "Commandes",
@@ -205,6 +207,54 @@
       "title": "Étiquettes des articles",
       "print": "Imprimer",
       "empty": "Cette commande n'a pas encore d'articles."
+    },
+    "users": {
+      "title": "Utilisateurs",
+      "newAccount": "Nouveau compte",
+      "cancel": "Annuler",
+      "allRoles": "Tous les rôles",
+      "empty": "Aucun utilisateur dans cette catégorie.",
+      "fullName": "Nom complet",
+      "role": "Rôle",
+      "emailLabel": "E-mail",
+      "passwordLabel": "Mot de passe",
+      "phoneOptional": "Téléphone (optionnel)",
+      "branchOptional": "Agence (optionnel)",
+      "noBranch": "Aucune agence",
+      "creating": "Création...",
+      "create": "Créer le compte",
+      "errorEmailInUse": "Cet e-mail est déjà utilisé.",
+      "errorWeakPassword": "Le mot de passe doit contenir au moins 8 caractères.",
+      "errorCreateFailed": "Échec de la création du compte — réessayez.",
+      "noName": "Sans nom",
+      "deactivate": "Désactiver",
+      "activate": "Activer",
+      "selfNote": "Vous ne pouvez pas modifier votre propre rôle ni désactiver votre propre compte.",
+      "actionFailed": "Échec de l'opération — réessayez."
+    },
+    "catalog": {
+      "title": "Catalogue et catégories",
+      "newCategory": "Nouvelle catégorie",
+      "cancel": "Annuler",
+      "create": "Créer",
+      "save": "Enregistrer",
+      "edit": "Modifier",
+      "saving": "Enregistrement...",
+      "deactivate": "Désactiver",
+      "activate": "Activer",
+      "addService": "Ajouter un service",
+      "noCategories": "Aucune catégorie pour le moment.",
+      "noServices": "Aucun service dans cette catégorie pour le moment.",
+      "nameAr": "Nom (arabe)",
+      "nameEn": "Nom (anglais)",
+      "nameFr": "Nom (français)",
+      "price": "Prix ($)",
+      "requiresFold": "Option pli/cintre",
+      "requiresStarch": "Option amidon",
+      "hauteCouture": "Haute couture",
+      "servicePlaceholderAr": "ex. قميص - كوي فقط",
+      "servicePlaceholderEn": "ex. Shirt - Iron only",
+      "actionFailed": "Échec de l'opération — réessayez."
     }
   },
   "driver": {
@@ -252,6 +302,13 @@
       "en_route": "En route",
       "completed": "Terminée",
       "failed": "Échouée"
+    },
+    "role": {
+      "customer": "Client",
+      "driver": "Chauffeur",
+      "staff": "Employé",
+      "admin": "Administrateur",
+      "super_admin": "Super administrateur"
     }
   }
 }

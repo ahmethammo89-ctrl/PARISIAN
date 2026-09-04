@@ -31,7 +31,7 @@ export default async function AdminLayout({
 
   return (
     <div>
-      <AdminNav />
+      <AdminNav role={profile.role} />
       {children}
     </div>
   );

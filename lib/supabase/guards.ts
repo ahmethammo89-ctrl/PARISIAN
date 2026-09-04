@@ -14,3 +14,6 @@ export async function currentActor(supabase: Client) {
 }
 
 export const STAFF_ROLES = ["staff", "admin", "super_admin"];
+
+/** Only these may create accounts or change roles — plain `staff` cannot. */
+export const ADMIN_ROLES = ["admin", "super_admin"];

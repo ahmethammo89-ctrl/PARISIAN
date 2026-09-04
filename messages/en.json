@@ -155,7 +155,9 @@
     "nav": {
       "dashboard": "Dashboard",
       "orders": "Orders",
-      "scan": "Scan"
+      "scan": "Scan",
+      "users": "Users",
+      "catalog": "Catalog"
     },
     "orders": {
       "title": "Orders",
@@ -205,6 +207,54 @@
       "title": "Item tags",
       "print": "Print",
       "empty": "This order has no items yet."
+    },
+    "users": {
+      "title": "Users",
+      "newAccount": "New account",
+      "cancel": "Cancel",
+      "allRoles": "All roles",
+      "empty": "No users in this category.",
+      "fullName": "Full name",
+      "role": "Role",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "phoneOptional": "Phone (optional)",
+      "branchOptional": "Branch (optional)",
+      "noBranch": "No branch",
+      "creating": "Creating...",
+      "create": "Create account",
+      "errorEmailInUse": "This email is already in use.",
+      "errorWeakPassword": "Password must be at least 8 characters.",
+      "errorCreateFailed": "Couldn't create the account — try again.",
+      "noName": "No name",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "selfNote": "You can't change your own role or deactivate your own account.",
+      "actionFailed": "That didn't work — try again."
+    },
+    "catalog": {
+      "title": "Catalog & categories",
+      "newCategory": "New category",
+      "cancel": "Cancel",
+      "create": "Create",
+      "save": "Save",
+      "edit": "Edit",
+      "saving": "Saving...",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "addService": "Add service",
+      "noCategories": "No categories yet.",
+      "noServices": "No services in this category yet.",
+      "nameAr": "Name (Arabic)",
+      "nameEn": "Name (English)",
+      "nameFr": "Name (French)",
+      "price": "Price ($)",
+      "requiresFold": "Fold/hanger option",
+      "requiresStarch": "Starch option",
+      "hauteCouture": "Haute couture",
+      "servicePlaceholderAr": "e.g. قميص - كوي فقط",
+      "servicePlaceholderEn": "e.g. Shirt - Iron only",
+      "actionFailed": "That didn't work — try again."
     }
   },
   "driver": {
@@ -252,6 +302,13 @@
       "en_route": "En route",
       "completed": "Completed",
       "failed": "Failed"
+    },
+    "role": {
+      "customer": "Customer",
+      "driver": "Driver",
+      "staff": "Staff",
+      "admin": "Admin",
+      "super_admin": "Super Admin"
     }
   }
 }

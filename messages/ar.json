@@ -155,7 +155,9 @@
     "nav": {
       "dashboard": "الرئيسية",
       "orders": "الطلبات",
-      "scan": "المسح"
+      "scan": "المسح",
+      "users": "المستخدمون",
+      "catalog": "الخدمات"
     },
     "orders": {
       "title": "الطلبات",
@@ -205,6 +207,54 @@
       "title": "ملصقات القطع",
       "print": "طباعة",
       "empty": "لا توجد قطع في هذا الطلب بعد."
+    },
+    "users": {
+      "title": "المستخدمون",
+      "newAccount": "حساب جديد",
+      "cancel": "إلغاء",
+      "allRoles": "كل الأدوار",
+      "empty": "لا يوجد مستخدمون بهذا التصنيف.",
+      "fullName": "الاسم الكامل",
+      "role": "الدور",
+      "emailLabel": "البريد الإلكتروني",
+      "passwordLabel": "كلمة المرور",
+      "phoneOptional": "الهاتف (اختياري)",
+      "branchOptional": "الفرع (اختياري)",
+      "noBranch": "بدون فرع",
+      "creating": "جارٍ الإنشاء...",
+      "create": "إنشاء الحساب",
+      "errorEmailInUse": "هذا البريد الإلكتروني مستخدم مسبقاً.",
+      "errorWeakPassword": "كلمة المرور يجب أن تكون 8 أحرف على الأقل.",
+      "errorCreateFailed": "تعذّر إنشاء الحساب — حاول مرة أخرى.",
+      "noName": "بدون اسم",
+      "deactivate": "تعطيل",
+      "activate": "تفعيل",
+      "selfNote": "لا يمكنك تعديل دورك أو تعطيل حسابك الخاص.",
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى."
+    },
+    "catalog": {
+      "title": "الخدمات والأقسام",
+      "newCategory": "قسم جديد",
+      "cancel": "إلغاء",
+      "create": "إنشاء",
+      "save": "حفظ",
+      "edit": "تعديل",
+      "saving": "جارٍ الحفظ...",
+      "deactivate": "تعطيل",
+      "activate": "تفعيل",
+      "addService": "إضافة خدمة",
+      "noCategories": "لا توجد أقسام بعد.",
+      "noServices": "لا توجد خدمات بهذا القسم بعد.",
+      "nameAr": "الاسم (عربي)",
+      "nameEn": "الاسم (إنجليزي)",
+      "nameFr": "الاسم (فرنسي)",
+      "price": "السعر ($)",
+      "requiresFold": "خيار طي/شماعة",
+      "requiresStarch": "خيار النشا",
+      "hauteCouture": "عناية فاخرة",
+      "servicePlaceholderAr": "مثال: قميص - كوي فقط",
+      "servicePlaceholderEn": "e.g. Shirt - Iron only",
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى."
     }
   },
   "driver": {
@@ -252,6 +302,13 @@
       "en_route": "في الطريق",
       "completed": "مكتملة",
       "failed": "فاشلة"
+    },
+    "role": {
+      "customer": "زبون",
+      "driver": "سائق",
+      "staff": "موظف",
+      "admin": "مسؤول",
+      "super_admin": "مسؤول أعلى"
     }
   }
 }

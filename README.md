@@ -6,7 +6,7 @@ Premium, API-first ordering platform for Parisian Laundry — a customer orderin
 
 **Customer app** — sign in with Google, email/password, or phone/OTP (all three on one login page, each fully independent — see Auth below), multiple saved addresses, a 5-category luxury service menu (Clothes, Upholstery, Shoes, Bags, Haute Couture), per-item customization (fold/hanger, starch level, stain notes), a native-feel per-item photo upload (one slot per physical item, camera capture), live dynamic pricing (Normal/Express/Urgent), Whish Money + Cash on Delivery checkout, and a WhatsApp fallback.
 
-**Admin dashboard** — an order queue with status/branch filters and search, a full order detail view (customer, address, items, payments, status history), one-click order status advancement, driver assignment (pickup + dropoff, any branch), per-item status control, and printable QR/barcode tag sheets.
+**Admin dashboard** — an order queue with status/branch filters and search, a full order detail view (customer, address, items, payments, status history), one-click order status advancement, driver assignment (pickup + dropoff, any branch), per-item status control, printable QR/barcode tag sheets, a **Catalog** page (any staff) to add/edit categories and services with per-service trilingual names and prices, and a **Users** page (admin/super_admin only) to create staff/driver/admin accounts directly and change roles/branch/active status — no SQL needed for day-to-day team or catalog management.
 
 **Anti-loss (QR/barcode) system** — every physical item gets a unique barcode at order creation (`PLI-########`). `/admin/tags/[orderId]` renders a printable QR label per item. `/admin/scan` looks an item up by barcode — via a physical USB/Bluetooth scanner (acts as a keyboard, just scan into the input), by typing the code, or with the device camera (native `BarcodeDetector` API where supported) — and shows the customer's pre-upload photos plus lets staff move the item's status forward or flag it lost/damaged, with an optional staff-taken photo attached.
 
@@ -48,7 +48,9 @@ At [supabase.com](https://supabase.com), create a new project (any region close 
 In the Supabase SQL editor, run these **in order**:
 
 1. `supabase/01_schema.sql` — full schema: tables, enums, RLS policies, the `item-photos` storage bucket and its policies, and the two known branches (Sakiet Al-Janzir, Clemenceau).
-2. `supabase/02_seed_catalog.sql` — the 5 service categories and 16 starter services (trilingual). Edit prices/names directly in the Supabase table editor afterwards as needed — this file only seeds a starting catalog.
+2. `supabase/02_seed_catalog.sql` — the 5 service categories and 16 starter services (trilingual), just a starting point. Manage categories/services (add, rename, reprice, deactivate) from **Admin → Catalog** in the app from now on — no SQL or table editor needed.
+
+**Modeling "iron only" vs "wash & iron" for the same item**: there's no separate service-type field — each variant is its own catalog entry with its own price (e.g. "Shirt — Iron only" and "Shirt — Wash & Iron" as two rows under Clothes). Add both from Admin → Catalog; the customer picks whichever one matches what they need, per item.
 
 `supabase/03_promote_roles.example.sql` is a **reference**, not a migration — read it when you need to turn a signed-up customer into staff/admin/driver (see step 5).
 
@@ -86,7 +88,7 @@ Sign up once through the app with your own phone number (as a normal customer), 
 update profiles set role = 'admin' where phone = '+<your-e164-phone>';
 ```
 
-Reload — you'll land on `/admin/dashboard`. Repeat with `role = 'driver'` for driver test accounts.
+Reload — you'll land on `/admin/dashboard`. This one SQL promotion is a one-time bootstrap step (there has to be a first admin). From then on, that admin creates every other staff/driver/admin account from `/admin/users` in the UI — no more SQL needed.
 
 ### 6. Deploy to Vercel
 
@@ -99,3 +101,4 @@ Push this repo to GitHub, import it in Vercel, and set the same environment vari
 - **Camera barcode scanning** (`/admin/scan`) uses the native `BarcodeDetector` Web API, currently supported on Chromium-based browsers (Chrome/Edge, most Android devices). Where it's unavailable, the same screen still works fully via a physical USB/Bluetooth barcode scanner or manual entry — no functionality is lost, only the camera shortcut.
 - **`profiles.phone` for Google/email accounts**: the auto-provisioning trigger (`handle_new_auth_user()` in `01_schema.sql`) falls back to the email address when a sign-up has no phone number, so a customer who joined via Google or email/password won't have a real phone on file. The admin/driver UI already accounts for this — call/WhatsApp buttons only render when the value actually looks like a phone number (`lib/format.ts#isPhoneLike`) — but if collecting a real phone from these customers matters operationally, add a "confirm your phone" prompt to the customer dashboard, or a `profiles.email` column + an updated trigger, as a follow-up.
 - **Order list pagination**: `/admin/orders` currently shows the latest 50 matching orders; add real pagination if/when order volume regularly exceeds that.
+- **New accounts created from `/admin/users`** go through Supabase's Admin API with `email_confirm: true`, so they're usable immediately with no confirmation email — but they inherit the same `profiles.phone` quirk above if no phone is given at creation (email stored there instead).
