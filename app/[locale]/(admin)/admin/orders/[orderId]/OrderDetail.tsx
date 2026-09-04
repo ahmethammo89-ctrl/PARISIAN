@@ -26,6 +26,8 @@ type ItemWithExtras = OrderItemRow & {
   photos: (OrderItemPhotoRow & { signedUrl: string | null })[];
 };
 
+type PaymentWithProof = PaymentRow & { proofSignedUrl: string | null };
+
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "9613703442";
 
 export default function OrderDetail({
@@ -47,7 +49,7 @@ export default function OrderDetail({
   branchPhone: string | null;
   items: ItemWithExtras[];
   history: OrderStatusHistoryRow[];
-  payments: PaymentRow[];
+  payments: PaymentWithProof[];
   tasks: DriverTaskRow[];
   drivers: { id: string; full_name: string | null; phone: string }[];
 }) {
@@ -85,6 +87,24 @@ export default function OrderDetail({
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ status }),
+      });
+      if (!res.ok) throw new Error();
+      router.refresh();
+    } catch {
+      setError(t("actionFailed"));
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function reviewPayment(paymentId: string, action: "confirm" | "reject") {
+    setBusy(`payment:${paymentId}`);
+    setError(null);
+    try {
+      const res = await fetch(`/api/admin/payments/${paymentId}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action }),
       });
       if (!res.ok) throw new Error();
       router.refresh();
@@ -284,14 +304,54 @@ export default function OrderDetail({
           {t("total")}: <span className="font-semibold">{formatPrice(order.total_amount, locale)}</span>
         </p>
         {payments.length === 0 && <p className="text-sm text-navy/60">{t("noPayments")}</p>}
-        {payments.map((p) => (
-          <div key={p.id} className="flex items-center justify-between text-sm text-navy-dark/80">
-            <span>
-              {p.provider} · {formatPrice(p.amount, locale)}
-            </span>
-            <span className="text-xs">{p.status}</span>
-          </div>
-        ))}
+        <div className="space-y-3">
+          {payments.map((p) => (
+            <div key={p.id} className="rounded-xl border border-sky-light/70 bg-white p-3">
+              <div className="flex items-center justify-between text-sm text-navy-dark/80">
+                <span>
+                  {p.provider} · {formatPrice(p.amount, locale)}
+                </span>
+                <span className="text-xs">{t(`paymentStatus.${p.status}`)}</span>
+              </div>
+
+              {p.provider === "whish" && (p.provider_reference || p.proofSignedUrl) && (
+                <div className="mt-2 space-y-2">
+                  {p.provider_reference && (
+                    <p className="text-xs text-navy-dark/70">
+                      {t("transactionId")}: <span className="font-mono">{p.provider_reference}</span>
+                    </p>
+                  )}
+                  {p.proofSignedUrl && (
+                    <a href={p.proofSignedUrl} target="_blank" rel="noopener noreferrer">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.proofSignedUrl} alt="" className="h-32 w-full max-w-xs rounded-lg border border-sky-light object-cover" />
+                    </a>
+                  )}
+                  {p.status === "pending" && (
+                    <div className="flex gap-2">
+                      <button
+                        type="button"
+                        disabled={busy !== null}
+                        onClick={() => reviewPayment(p.id, "confirm")}
+                        className="rounded-full bg-navy px-3.5 py-1.5 text-xs font-semibold text-base hover:bg-navy-dark disabled:opacity-50"
+                      >
+                        {busy === `payment:${p.id}` ? t("saving") : t("confirmPayment")}
+                      </button>
+                      <button
+                        type="button"
+                        disabled={busy !== null}
+                        onClick={() => reviewPayment(p.id, "reject")}
+                        className="rounded-full border border-red-300 px-3.5 py-1.5 text-xs font-medium text-red-700 hover:bg-red-50 disabled:opacity-50"
+                      >
+                        {t("rejectPayment")}
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* History */}

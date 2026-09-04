@@ -54,7 +54,9 @@
     "comingSoon": "More is on the way.",
     "newOrder": "Place a new order",
     "viewAllOrders": "View all orders",
-    "scanItem": "Scan an item"
+    "scanItem": "Scan an item",
+    "myOrders": "My orders",
+    "noOrders": "No orders yet."
   },
   "order": {
     "title": "New Order",
@@ -148,6 +150,28 @@
       "mockDesc": "This stands in for the real Whish Money payment screen until live credentials are connected.",
       "simulateSuccess": "Simulate successful payment",
       "paid": "Payment received — thank you!",
+      "backToDashboard": "Back to my account",
+      "cancel": "Cancel",
+      "proofFailed": "Couldn't submit payment proof — try again.",
+      "proofPhotoLabel": "Transfer confirmation screenshot",
+      "proofSubmitted": "Payment proof submitted — awaiting staff review.",
+      "submitProof": "Submit payment proof",
+      "transactionIdLabel": "Transaction ID",
+      "uploadProof": "Upload photo",
+      "whishInstructions": "Transfer {amount} to {number} in the Whish app, then upload a screenshot of the confirmation along with the transaction ID.",
+      "whishInstructionsTitle": "Pay with Whish Money"
+    },
+    "detail": {
+      "total": "Total",
+      "paid": "Paid",
+      "awaitingReview": "Payment proof is awaiting staff review.",
+      "payNow": "Pay now",
+      "editLocked": "You can't edit this order after pickup.",
+      "editItem": "Edit item options",
+      "editFailed": "Couldn't save — try again.",
+      "save": "Save",
+      "cancel": "Cancel",
+      "saving": "Saving...",
       "backToDashboard": "Back to my account"
     }
   },
@@ -185,7 +209,16 @@
       "total": "Total",
       "noPayments": "No payment recorded yet.",
       "history": "Status history",
-      "printTags": "Print QR tags"
+      "printTags": "Print QR tags",
+      "confirmPayment": "Confirm payment",
+      "rejectPayment": "Reject",
+      "transactionId": "Transaction ID",
+      "paymentStatus": {
+        "pending": "Awaiting review",
+        "paid": "Paid",
+        "failed": "Rejected",
+        "refunded": "Refunded"
+      }
     },
     "scan": {
       "title": "Scan item",
@@ -230,7 +263,15 @@
       "deactivate": "Deactivate",
       "activate": "Activate",
       "selfNote": "You can't change your own role or deactivate your own account.",
-      "actionFailed": "That didn't work — try again."
+      "actionFailed": "That didn't work — try again.",
+      "confirmReset": "Confirm",
+      "newPasswordPlaceholder": "New password (8+ characters)",
+      "noCustomers": "No customers.",
+      "resetFailed": "Couldn't reset password — try again.",
+      "resetPassword": "Reset password",
+      "resetSuccess": "Password changed — tell the customer the new one.",
+      "tabCustomers": "Customers",
+      "tabTeam": "Team"
     },
     "catalog": {
       "title": "Catalog & categories",

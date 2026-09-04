@@ -54,7 +54,9 @@
     "comingSoon": "Plus de fonctionnalités arrivent bientôt.",
     "newOrder": "Passer une nouvelle commande",
     "viewAllOrders": "Voir toutes les commandes",
-    "scanItem": "Scanner un article"
+    "scanItem": "Scanner un article",
+    "myOrders": "Mes commandes",
+    "noOrders": "Aucune commande pour le moment."
   },
   "order": {
     "title": "Nouvelle commande",
@@ -148,6 +150,28 @@
       "mockDesc": "Cet écran remplace la vraie page de paiement Whish Money en attendant la connexion des identifiants réels.",
       "simulateSuccess": "Simuler un paiement réussi",
       "paid": "Paiement reçu — merci !",
+      "backToDashboard": "Retour à mon compte",
+      "cancel": "Annuler",
+      "proofFailed": "Échec de l'envoi de la preuve de paiement — réessayez.",
+      "proofPhotoLabel": "Capture d'écran de confirmation du virement",
+      "proofSubmitted": "Preuve de paiement envoyée — en attente de vérification.",
+      "submitProof": "Envoyer la preuve de paiement",
+      "transactionIdLabel": "Identifiant de transaction",
+      "uploadProof": "Téléverser une photo",
+      "whishInstructions": "Transférez {amount} au numéro {number} via l'application Whish, puis téléversez une capture d'écran de la confirmation avec l'identifiant de transaction.",
+      "whishInstructionsTitle": "Payer avec Whish Money"
+    },
+    "detail": {
+      "total": "Total",
+      "paid": "Payé",
+      "awaitingReview": "Preuve de paiement en attente de vérification.",
+      "payNow": "Payer maintenant",
+      "editLocked": "Modification impossible après la collecte.",
+      "editItem": "Modifier les options de l'article",
+      "editFailed": "Échec de l'enregistrement — réessayez.",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "saving": "Enregistrement...",
       "backToDashboard": "Retour à mon compte"
     }
   },
@@ -185,7 +209,16 @@
       "total": "Total",
       "noPayments": "Aucun paiement enregistré pour le moment.",
       "history": "Historique du statut",
-      "printTags": "Imprimer les étiquettes QR"
+      "printTags": "Imprimer les étiquettes QR",
+      "confirmPayment": "Confirmer le paiement",
+      "rejectPayment": "Rejeter",
+      "transactionId": "Identifiant de transaction",
+      "paymentStatus": {
+        "pending": "En attente de vérification",
+        "paid": "Payé",
+        "failed": "Rejeté",
+        "refunded": "Remboursé"
+      }
     },
     "scan": {
       "title": "Scanner un article",
@@ -230,7 +263,15 @@
       "deactivate": "Désactiver",
       "activate": "Activer",
       "selfNote": "Vous ne pouvez pas modifier votre propre rôle ni désactiver votre propre compte.",
-      "actionFailed": "Échec de l'opération — réessayez."
+      "actionFailed": "Échec de l'opération — réessayez.",
+      "confirmReset": "Confirmer",
+      "newPasswordPlaceholder": "Nouveau mot de passe (8+ caractères)",
+      "noCustomers": "Aucun client.",
+      "resetFailed": "Échec de la réinitialisation — réessayez.",
+      "resetPassword": "Réinitialiser le mot de passe",
+      "resetSuccess": "Mot de passe changé — communiquez-le au client.",
+      "tabCustomers": "Clients",
+      "tabTeam": "Équipe"
     },
     "catalog": {
       "title": "Catalogue et catégories",

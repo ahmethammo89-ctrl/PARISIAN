@@ -54,7 +54,9 @@
     "comingSoon": "المزيد قريباً.",
     "newOrder": "إنشاء طلب جديد",
     "viewAllOrders": "عرض جميع الطلبات",
-    "scanItem": "مسح قطعة"
+    "scanItem": "مسح قطعة",
+    "myOrders": "طلباتي",
+    "noOrders": "ما في طلبات بعد."
   },
   "order": {
     "title": "طلب جديد",
@@ -148,6 +150,28 @@
       "mockDesc": "هاي الصفحة بديلة مؤقتة لصفحة الدفع الحقيقية لحد ما يتم ربط بيانات Whish Money الفعلية.",
       "simulateSuccess": "محاكاة دفع ناجح",
       "paid": "تم استلام الدفعة — شكراً لك!",
+      "backToDashboard": "العودة لحسابي",
+      "cancel": "إلغاء",
+      "proofFailed": "تعذّر إرسال إثبات الدفع — حاول مرة أخرى.",
+      "proofPhotoLabel": "صورة إثبات التحويل",
+      "proofSubmitted": "تم إرسال إثبات الدفع — بانتظار مراجعة الموظف.",
+      "submitProof": "إرسال إثبات الدفع",
+      "transactionIdLabel": "رقم العملية (Transaction ID)",
+      "uploadProof": "رفع صورة",
+      "whishInstructions": "حوّل {amount} إلى الرقم {number} عبر تطبيق Whish، وبعدها ارفع صورة تأكيد التحويل مع رقم العملية.",
+      "whishInstructionsTitle": "الدفع عبر Whish Money"
+    },
+    "detail": {
+      "total": "الإجمالي",
+      "paid": "تم الدفع",
+      "awaitingReview": "إثبات الدفع بانتظار مراجعة الموظف.",
+      "payNow": "الدفع الآن",
+      "editLocked": "ما فيك تعدّل على الطلب بعد الاستلام.",
+      "editItem": "تعديل خيارات القطعة",
+      "editFailed": "تعذّر الحفظ — حاول مرة أخرى.",
+      "save": "حفظ",
+      "cancel": "إلغاء",
+      "saving": "جارٍ الحفظ...",
       "backToDashboard": "العودة لحسابي"
     }
   },
@@ -185,7 +209,16 @@
       "total": "الإجمالي",
       "noPayments": "لا توجد دفعة مسجّلة بعد.",
       "history": "سجل الحالة",
-      "printTags": "طباعة ملصقات QR"
+      "printTags": "طباعة ملصقات QR",
+      "confirmPayment": "تأكيد الدفع",
+      "rejectPayment": "رفض",
+      "transactionId": "رقم العملية",
+      "paymentStatus": {
+        "pending": "بانتظار المراجعة",
+        "paid": "مدفوع",
+        "failed": "مرفوض",
+        "refunded": "مسترجع"
+      }
     },
     "scan": {
       "title": "مسح قطعة",
@@ -230,7 +263,15 @@
       "deactivate": "تعطيل",
       "activate": "تفعيل",
       "selfNote": "لا يمكنك تعديل دورك أو تعطيل حسابك الخاص.",
-      "actionFailed": "لم تنجح العملية — حاول مرة أخرى."
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى.",
+      "confirmReset": "تأكيد",
+      "newPasswordPlaceholder": "كلمة مرور جديدة (8 أحرف فأكثر)",
+      "noCustomers": "لا يوجد زبائن.",
+      "resetFailed": "تعذّر تغيير كلمة المرور — حاول مرة أخرى.",
+      "resetPassword": "إعادة تعيين كلمة المرور",
+      "resetSuccess": "تم تغيير كلمة المرور — بلّغ الزبون بالكلمة الجديدة.",
+      "tabCustomers": "الزبائن",
+      "tabTeam": "الفريق"
     },
     "catalog": {
       "title": "الخدمات والأقسام",

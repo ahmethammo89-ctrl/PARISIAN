@@ -212,6 +212,7 @@ export type PaymentRow = {
   status: PaymentStatus;
   payment_link: string | null;
   provider_reference: string | null;
+  proof_photo_url: string | null;
   paid_at: string | null;
   created_at: string;
 }

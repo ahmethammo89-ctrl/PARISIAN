@@ -39,6 +39,13 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
     : { data: [] };
   const signedMap = new Map((signed ?? []).map((s) => [s.path, s.signedUrl]));
 
+  // Same for any manual Whish proof-of-payment screenshots.
+  const proofPaths = (payments ?? []).map((p) => p.proof_photo_url).filter((p): p is string => !!p);
+  const { data: signedProofs } = proofPaths.length
+    ? await supabase.storage.from("item-photos").createSignedUrls(proofPaths, 3600)
+    : { data: [] };
+  const signedProofMap = new Map((signedProofs ?? []).map((s) => [s.path, s.signedUrl]));
+
   return (
     <OrderDetail
       order={order}
@@ -54,7 +61,10 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
           .map((p) => ({ ...p, signedUrl: signedMap.get(p.photo_url) ?? null })),
       }))}
       history={history ?? []}
-      payments={payments ?? []}
+      payments={(payments ?? []).map((p) => ({
+        ...p,
+        proofSignedUrl: p.proof_photo_url ? signedProofMap.get(p.proof_photo_url) ?? null : null,
+      }))}
       tasks={tasks ?? []}
       drivers={drivers ?? []}
     />

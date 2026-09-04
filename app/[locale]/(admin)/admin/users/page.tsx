@@ -23,18 +23,37 @@ export default async function AdminUsersPage({ params }: { params: Promise<{ loc
     return;
   }
 
-  const [{ data: users }, { data: branches }] = await Promise.all([
+  const isSuperAdmin = me.role === "super_admin";
+
+  const [{ data: users }, { data: branches }, { data: customers }] = await Promise.all([
     supabase
       .from("profiles")
       .select("id, full_name, phone, role, branch_id, is_active, created_at")
       .neq("role", "customer")
       .order("created_at", { ascending: false }),
     supabase.from("branches").select("id, name").eq("is_active", true).order("created_at", { ascending: true }),
+    // Customer accounts (incl. Google/email sign-ups) — super_admin
+    // only, per product decision: regular admin manages the team, not
+    // the customer base.
+    isSuperAdmin
+      ? supabase
+          .from("profiles")
+          .select("id, full_name, phone, role, branch_id, is_active, created_at")
+          .eq("role", "customer")
+          .order("created_at", { ascending: false })
+          .limit(300)
+      : Promise.resolve({ data: null }),
   ]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-      <UsersClient initialUsers={users ?? []} branches={branches ?? []} currentUserId={user.id} />
+      <UsersClient
+        initialUsers={users ?? []}
+        branches={branches ?? []}
+        currentUserId={user.id}
+        isSuperAdmin={isSuperAdmin}
+        initialCustomers={customers ?? []}
+      />
     </div>
   );
 }

@@ -23,10 +23,14 @@ export default function UsersClient({
   initialUsers,
   branches,
   currentUserId,
+  isSuperAdmin,
+  initialCustomers,
 }: {
   initialUsers: UserRow[];
   branches: Branch[];
   currentUserId: string;
+  isSuperAdmin: boolean;
+  initialCustomers: UserRow[];
 }) {
   const t = useTranslations("admin.users");
   const tr = useTranslations("status.role");
@@ -34,8 +38,10 @@ export default function UsersClient({
   const router = useRouter();
 
   const [users, setUsers] = useState(initialUsers);
+  const [customers, setCustomers] = useState(initialCustomers);
   const [showForm, setShowForm] = useState(false);
   const [roleFilter, setRoleFilter] = useState<UserRole | "all">("all");
+  const [tab, setTab] = useState<"team" | "customers">("team");
 
   const filtered = roleFilter === "all" ? users : users.filter((u) => u.role === roleFilter);
 
@@ -43,54 +49,99 @@ export default function UsersClient({
     <div>
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="font-heading text-2xl text-navy-dark sm:text-3xl">{t("title")}</h1>
-        <button
-          type="button"
-          onClick={() => setShowForm((s) => !s)}
-          className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-base hover:bg-navy-dark"
-        >
-          {showForm ? t("cancel") : t("newAccount")}
-        </button>
+        {tab === "team" && (
+          <button
+            type="button"
+            onClick={() => setShowForm((s) => !s)}
+            className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-base hover:bg-navy-dark"
+          >
+            {showForm ? t("cancel") : t("newAccount")}
+          </button>
+        )}
       </div>
 
-      {showForm && (
-        <CreateUserForm
-          branches={branches}
-          onCreated={(u) => {
-            setUsers((prev) => [u, ...prev]);
-            setShowForm(false);
-          }}
-        />
-      )}
-
-      <div className="mt-6 flex flex-wrap gap-1.5">
-        {(["all", ...ASSIGNABLE_ROLES] as const).map((r) => (
+      {isSuperAdmin && (
+        <div className="mt-4 flex gap-1.5">
           <button
-            key={r}
             type="button"
-            onClick={() => setRoleFilter(r)}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
-              roleFilter === r ? "bg-navy text-base" : "border border-navy/20 text-navy-dark/70 hover:bg-sky-pale"
+            onClick={() => setTab("team")}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              tab === "team" ? "bg-navy text-base" : "border border-navy/20 text-navy-dark/70 hover:bg-sky-pale"
             }`}
           >
-            {r === "all" ? t("allRoles") : tr(r)}
+            {t("tabTeam")}
           </button>
-        ))}
-      </div>
+          <button
+            type="button"
+            onClick={() => setTab("customers")}
+            className={`rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              tab === "customers" ? "bg-navy text-base" : "border border-navy/20 text-navy-dark/70 hover:bg-sky-pale"
+            }`}
+          >
+            {t("tabCustomers")} ({customers.length})
+          </button>
+        </div>
+      )}
 
-      <div className="mt-4 space-y-2">
-        {filtered.length === 0 && <p className="text-sm text-navy-dark/60">{t("empty")}</p>}
-        {filtered.map((u) => (
-          <UserRowCard
-            key={u.id}
-            u={u}
-            branches={branches}
-            locale={locale}
-            isSelf={u.id === currentUserId}
-            onChange={(patch) => setUsers((prev) => prev.map((p) => (p.id === u.id ? { ...p, ...patch } : p)))}
-            refresh={() => router.refresh()}
-          />
-        ))}
-      </div>
+      {tab === "team" ? (
+        <>
+          {showForm && (
+            <CreateUserForm
+              branches={branches}
+              onCreated={(u) => {
+                setUsers((prev) => [u, ...prev]);
+                setShowForm(false);
+              }}
+            />
+          )}
+
+          <div className="mt-6 flex flex-wrap gap-1.5">
+            {(["all", ...ASSIGNABLE_ROLES] as const).map((r) => (
+              <button
+                key={r}
+                type="button"
+                onClick={() => setRoleFilter(r)}
+                className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
+                  roleFilter === r ? "bg-navy text-base" : "border border-navy/20 text-navy-dark/70 hover:bg-sky-pale"
+                }`}
+              >
+                {r === "all" ? t("allRoles") : tr(r)}
+              </button>
+            ))}
+          </div>
+
+          <div className="mt-4 space-y-2">
+            {filtered.length === 0 && <p className="text-sm text-navy-dark/60">{t("empty")}</p>}
+            {filtered.map((u) => (
+              <UserRowCard
+                key={u.id}
+                u={u}
+                branches={branches}
+                locale={locale}
+                isSelf={u.id === currentUserId}
+                onChange={(patch) => setUsers((prev) => prev.map((p) => (p.id === u.id ? { ...p, ...patch } : p)))}
+                refresh={() => router.refresh()}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="mt-6 space-y-2">
+          {customers.length === 0 && <p className="text-sm text-navy-dark/60">{t("noCustomers")}</p>}
+          {customers.map((u) => (
+            <UserRowCard
+              key={u.id}
+              u={u}
+              branches={branches}
+              locale={locale}
+              isSelf={false}
+              isCustomer
+              onChange={(patch) => setCustomers((prev) => prev.map((p) => (p.id === u.id ? { ...p, ...patch } : p)))}
+              refresh={() => router.refresh()}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -208,6 +259,7 @@ function UserRowCard({
   branches,
   locale,
   isSelf,
+  isCustomer,
   onChange,
   refresh,
 }: {
@@ -215,6 +267,7 @@ function UserRowCard({
   branches: Branch[];
   locale: "ar" | "en" | "fr";
   isSelf: boolean;
+  isCustomer?: boolean;
   onChange: (patch: Partial<UserRow>) => void;
   refresh: () => void;
 }) {
@@ -222,6 +275,10 @@ function UserRowCard({
   const tr = useTranslations("status.role");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [resetOpen, setResetOpen] = useState(false);
+  const [newPw, setNewPw] = useState("");
+  const [resetBusy, setResetBusy] = useState(false);
+  const [resetMsg, setResetMsg] = useState<string | null>(null);
 
   async function patch(body: Record<string, unknown>, optimistic: Partial<UserRow>) {
     setBusy(true);
@@ -249,6 +306,29 @@ function UserRowCard({
     }
   }
 
+  async function submitResetPassword() {
+    setResetBusy(true);
+    setResetMsg(null);
+    try {
+      const res = await fetch(`/api/admin/users/${u.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newPassword: newPw }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setResetMsg(data?.detail ? `${t("resetFailed")} (${data.detail})` : t("resetFailed"));
+        return;
+      }
+      setResetMsg(t("resetSuccess"));
+      setNewPw("");
+    } catch {
+      setResetMsg(t("resetFailed"));
+    } finally {
+      setResetBusy(false);
+    }
+  }
+
   const branchName = branches.find((b) => b.id === u.branch_id)?.name;
 
   return (
@@ -261,18 +341,24 @@ function UserRowCard({
         </div>
 
         <div className="flex flex-wrap items-center gap-2">
-          <select
-            value={u.role}
-            disabled={busy || isSelf}
-            onChange={(e) => patch({ role: e.target.value }, { role: e.target.value as UserRole })}
-            className="rounded-full border border-navy/20 bg-white px-3 py-1.5 text-xs font-medium text-navy-dark disabled:opacity-50"
-          >
-            {ASSIGNABLE_ROLES.map((r) => (
-              <option key={r} value={r}>
-                {tr(r)}
-              </option>
-            ))}
-          </select>
+          {isCustomer ? (
+            <span className="rounded-full border border-navy/20 bg-white px-3 py-1.5 text-xs font-medium text-navy-dark">
+              {tr("customer")}
+            </span>
+          ) : (
+            <select
+              value={u.role}
+              disabled={busy || isSelf}
+              onChange={(e) => patch({ role: e.target.value }, { role: e.target.value as UserRole })}
+              className="rounded-full border border-navy/20 bg-white px-3 py-1.5 text-xs font-medium text-navy-dark disabled:opacity-50"
+            >
+              {ASSIGNABLE_ROLES.map((r) => (
+                <option key={r} value={r}>
+                  {tr(r)}
+                </option>
+              ))}
+            </select>
+          )}
 
           <button
             type="button"
@@ -284,8 +370,41 @@ function UserRowCard({
           >
             {u.is_active ? t("deactivate") : t("activate")}
           </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setResetOpen((s) => !s);
+              setResetMsg(null);
+            }}
+            className="rounded-full border border-navy/20 px-3 py-1.5 text-xs font-medium text-navy-dark hover:bg-sky-pale"
+          >
+            {t("resetPassword")}
+          </button>
         </div>
       </div>
+
+      {resetOpen && (
+        <div className="mt-3 flex flex-wrap items-center gap-2 rounded-xl border border-sky-light/70 bg-white p-3">
+          <input
+            type="text"
+            value={newPw}
+            onChange={(e) => setNewPw(e.target.value)}
+            minLength={8}
+            placeholder={t("newPasswordPlaceholder")}
+            className="min-w-0 flex-1 rounded-lg border border-navy-dark/15 bg-white px-3 py-2 text-sm text-start text-navy-dark placeholder:text-navy-dark/30 focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/30"
+          />
+          <button
+            type="button"
+            disabled={resetBusy || newPw.length < 8}
+            onClick={submitResetPassword}
+            className="shrink-0 rounded-full bg-navy px-4 py-2 text-xs font-semibold text-base hover:bg-navy-dark disabled:opacity-50"
+          >
+            {resetBusy ? t("saving") : t("confirmReset")}
+          </button>
+          {resetMsg && <p className="w-full text-xs text-navy-dark/80">{resetMsg}</p>}
+        </div>
+      )}
 
       {isSelf && <p className="mt-2 text-[11px] text-navy/50">{t("selfNote")}</p>}
       {error && <p className="mt-2 text-xs text-red-700">{error}</p>}

@@ -19,6 +19,29 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ us
   }
 
   const body = await request.json().catch(() => null);
+
+  // Password reset is a separate auth.users write (not a profiles
+  // column) — handle it on its own via the Admin API, independent of
+  // whatever profile fields (if any) are also being patched below.
+  if (typeof body?.newPassword === "string") {
+    if (body.newPassword.length < 8) {
+      return NextResponse.json({ error: "weak_password" }, { status: 400 });
+    }
+    try {
+      const admin = createAdminClient();
+      const { error } = await admin.auth.admin.updateUserById(userId, { password: body.newPassword });
+      if (error) {
+        console.error("[admin/users/:id] password reset failed:", error.message, error);
+        return NextResponse.json({ error: "reset_failed", detail: error.message }, { status: 500 });
+      }
+      return NextResponse.json({ ok: true });
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      console.error("[admin/users/:id] password reset unexpected error:", detail, err);
+      return NextResponse.json({ error: "reset_failed", detail }, { status: 500 });
+    }
+  }
+
   const patch: Partial<ProfileRow> = {};
 
   if (body?.role !== undefined) {
