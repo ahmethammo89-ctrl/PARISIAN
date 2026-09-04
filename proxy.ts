@@ -40,5 +40,9 @@ export default async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
+  // "auth" excluded so /auth/callback (Google OAuth + email-confirmation
+  // redirect target) reaches its Route Handler with an untouched URL —
+  // next-intl would otherwise try to locale-prefix it before the `code`
+  // exchange ever runs.
+  matcher: ["/((?!api|auth|_next/static|_next/image|favicon.ico|.*\\..*).*)"],
 };

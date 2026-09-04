@@ -1,61 +1,35 @@
 "use client";
 
-import { useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
-import { createClient } from "@/lib/supabase/client";
+import GoogleButton from "./GoogleButton";
+import EmailPasswordForm from "./EmailPasswordForm";
+import PhoneForm from "./PhoneForm";
+
+function Divider({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 text-xs text-navy-dark/40">
+      <span className="h-px flex-1 bg-navy-dark/10" />
+      {label}
+      <span className="h-px flex-1 bg-navy-dark/10" />
+    </div>
+  );
+}
 
 export default function LoginForm() {
   const t = useTranslations("auth");
-  const router = useRouter();
-  const supabase = createClient();
-
-  const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    setLoading(true);
-
-    const { error: otpError } = await supabase.auth.signInWithOtp({ phone });
-
-    setLoading(false);
-    if (otpError) {
-      setError(t("errorGeneric"));
-      return;
-    }
-    router.push(`/verify?phone=${encodeURIComponent(phone)}`);
-  }
+  const searchParams = useSearchParams();
+  const oauthFailed = searchParams.get("error") === "auth_failed";
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div className="flex flex-col gap-2">
-        <label htmlFor="phone" className="text-sm font-medium text-navy-dark/80">
-          {t("phoneLabel")}
-        </label>
-        <input
-          id="phone"
-          type="tel"
-          required
-          dir="ltr"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder={t("phonePlaceholder")}
-          className="w-full rounded-lg border border-navy-dark/15 bg-white px-4 py-3 text-start text-navy-dark placeholder:text-navy-dark/30 focus:border-sky focus:outline-none focus:ring-2 focus:ring-sky/30"
-        />
-      </div>
+    <div className="flex flex-col gap-6">
+      {oauthFailed && <p className="rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700">{t("errorOAuth")}</p>}
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
-
-      <button
-        type="submit"
-        disabled={loading}
-        className="rounded-lg bg-navy px-4 py-3 font-medium text-base transition-colors hover:bg-navy-dark disabled:opacity-50"
-      >
-        {loading ? t("sending") : t("sendCode")}
-      </button>
-    </form>
+      <GoogleButton />
+      <Divider label={t("or")} />
+      <EmailPasswordForm />
+      <Divider label={t("or")} />
+      <PhoneForm />
+    </div>
   );
 }

@@ -5,9 +5,8 @@ import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import StatusBadge from "@/components/StatusBadge";
 import { driverTaskStatusOptions } from "@/lib/orderFlow";
+import { isPhoneLike } from "@/lib/format";
 import type { DriverTaskRow, AddressRow, LocalizedText, DriverTaskStatus } from "@/types/database";
-
-const WHATSAPP_NUMBER_DEFAULT = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "9613703442";
 
 type Entry = {
   task: DriverTaskRow;
@@ -79,7 +78,8 @@ function TaskCard({ entry, compact }: { entry: Entry; compact?: boolean }) {
       ? `${address.lat},${address.lng}`
       : [address?.address_line, address?.city].filter(Boolean).join(", ");
   const mapsHref = mapsQuery ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}` : null;
-  const whatsappHref = customer ? `https://wa.me/${customer.phone.replace(/[^\d]/g, "")}` : `https://wa.me/${WHATSAPP_NUMBER_DEFAULT}`;
+  const customerHasPhone = isPhoneLike(customer?.phone);
+  const whatsappHref = customerHasPhone ? `https://wa.me/${customer!.phone.replace(/[^\d]/g, "")}` : null;
 
   return (
     <div className={`rounded-2xl border border-sky-light bg-base-soft ${compact ? "p-3 opacity-70" : "p-4"}`}>
@@ -114,14 +114,16 @@ function TaskCard({ entry, compact }: { entry: Entry; compact?: boolean }) {
                 {t("navigate")}
               </a>
             )}
-            {customer && (
-              <a href={`tel:${customer.phone}`} className="rounded-full border border-navy/30 px-3 py-1.5 text-xs font-medium text-navy-dark hover:bg-sky-pale">
-                {t("call")}
-              </a>
+            {customerHasPhone && (
+              <>
+                <a href={`tel:${customer!.phone}`} className="rounded-full border border-navy/30 px-3 py-1.5 text-xs font-medium text-navy-dark hover:bg-sky-pale">
+                  {t("call")}
+                </a>
+                <a href={whatsappHref!} target="_blank" rel="noopener noreferrer" className="rounded-full border border-navy/30 px-3 py-1.5 text-xs font-medium text-navy-dark hover:bg-sky-pale">
+                  WhatsApp
+                </a>
+              </>
             )}
-            <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="rounded-full border border-navy/30 px-3 py-1.5 text-xs font-medium text-navy-dark hover:bg-sky-pale">
-              WhatsApp
-            </a>
           </div>
 
           {error && <p className="mt-2 text-xs text-red-700">{t("actionFailed")}</p>}

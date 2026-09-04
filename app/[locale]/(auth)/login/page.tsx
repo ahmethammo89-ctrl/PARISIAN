@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import LoginForm from "./LoginForm";
 
@@ -11,7 +12,9 @@ export default async function LoginPage() {
         <p className="mt-2 text-navy-dark/60">{t("loginSubtitle")}</p>
       </div>
       <div className="rounded-2xl border border-sky/20 bg-white/60 p-8 shadow-sm">
-        <LoginForm />
+        <Suspense fallback={null}>
+          <LoginForm />
+        </Suspense>
       </div>
     </div>
   );

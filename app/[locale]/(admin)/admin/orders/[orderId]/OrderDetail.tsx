@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
-import { formatPrice } from "@/lib/format";
+import { formatPrice, isPhoneLike } from "@/lib/format";
 import { orderStatusOptions, itemStatusOptions } from "@/lib/orderFlow";
 import StatusBadge from "@/components/StatusBadge";
 import type {
@@ -114,7 +114,8 @@ export default function OrderDetail({
     }
   }
 
-  const whatsappHref = customer ? `https://wa.me/${customer.phone.replace(/[^\d]/g, "")}` : "#";
+  const customerHasPhone = isPhoneLike(customer?.phone);
+  const whatsappHref = customerHasPhone ? `https://wa.me/${customer!.phone.replace(/[^\d]/g, "")}` : null;
   const pickupTask = tasks.find((t) => t.task_type === "pickup");
   const dropoffTask = tasks.find((t) => t.task_type === "dropoff");
 
@@ -143,12 +144,18 @@ export default function OrderDetail({
         <h2 className="mb-2 text-xs font-semibold uppercase tracking-wide text-navy">{t("customer")}</h2>
         <p className="font-medium text-navy-dark">{customer?.full_name || customer?.phone}</p>
         <div className="mt-1 flex gap-3 text-sm">
-          <a href={`tel:${customer?.phone}`} className="text-navy hover:underline">
-            {customer?.phone}
-          </a>
-          <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
-            WhatsApp
-          </a>
+          {customerHasPhone ? (
+            <>
+              <a href={`tel:${customer!.phone}`} className="text-navy hover:underline">
+                {customer!.phone}
+              </a>
+              <a href={whatsappHref!} target="_blank" rel="noopener noreferrer" className="text-teal hover:underline">
+                WhatsApp
+              </a>
+            </>
+          ) : (
+            customer?.phone && <span className="text-navy-dark/60">{customer.phone}</span>
+          )}
         </div>
         {address && (
           <p className="mt-2 text-sm text-navy-dark/80">
