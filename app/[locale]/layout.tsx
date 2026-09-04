@@ -5,7 +5,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing, localeDirection, type AppLocale } from "@/i18n/routing";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import SignOutButton from "@/components/SignOutButton";
 import { Link } from "@/i18n/navigation";
+import { createClient } from "@/lib/supabase/server";
 import "../globals.css";
 
 export function generateStaticParams() {
@@ -39,6 +41,11 @@ export default async function LocaleLayout({
 
   const direction = localeDirection[locale as AppLocale];
 
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html lang={locale} dir={direction}>
       <body className="min-h-screen bg-base text-navy-dark font-body antialiased">
@@ -57,7 +64,10 @@ export default async function LocaleLayout({
                 {locale === "ar" ? "المصبغة الباريسية" : "Parisian Laundry"}
               </span>
             </Link>
-            <LanguageSwitcher />
+            <div className="flex items-center gap-2">
+              {user && <SignOutButton />}
+              <LanguageSwitcher />
+            </div>
           </header>
           <main>{children}</main>
         </NextIntlClientProvider>

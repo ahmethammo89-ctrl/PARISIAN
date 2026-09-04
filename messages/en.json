@@ -43,7 +43,9 @@
   "nav": {
     "customer": "My Account",
     "admin": "Admin",
-    "driver": "Driver"
+    "driver": "Driver",
+    "signOut": "Sign out",
+    "signingOut": "Signing out..."
   },
   "dashboard": {
     "customerWelcome": "Welcome, {name}",

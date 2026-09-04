@@ -43,7 +43,9 @@
   "nav": {
     "customer": "حسابي",
     "admin": "الإدارة",
-    "driver": "السائق"
+    "driver": "السائق",
+    "signOut": "تسجيل خروج",
+    "signingOut": "جارٍ تسجيل الخروج..."
   },
   "dashboard": {
     "customerWelcome": "أهلاً، {name}",
