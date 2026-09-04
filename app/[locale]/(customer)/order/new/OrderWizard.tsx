@@ -305,18 +305,28 @@ export default function OrderWizard({
                         key={service.id}
                         className="flex items-center justify-between gap-3 rounded-xl border border-sky-light bg-base-soft px-4 py-3"
                       >
-                        <div>
-                          <p className="text-sm font-medium text-navy-dark">
-                            {localName(service.name, locale)}
-                            {service.is_haute_couture && (
-                              <span className="ms-2 rounded-full bg-navy px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-base">
-                                {t("services.haute")}
-                              </span>
-                            )}
-                          </p>
-                          <p className="text-xs text-sky">
-                            {t("services.from")} {formatPrice(service.base_price, locale)}
-                          </p>
+                        <div className="flex items-center gap-3">
+                          {service.image_url && (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              src={service.image_url}
+                              alt=""
+                              className="h-12 w-12 shrink-0 rounded-lg border border-sky-light object-cover"
+                            />
+                          )}
+                          <div>
+                            <p className="text-sm font-medium text-navy-dark">
+                              {localName(service.name, locale)}
+                              {service.is_haute_couture && (
+                                <span className="ms-2 rounded-full bg-navy px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-base">
+                                  {t("services.haute")}
+                                </span>
+                              )}
+                            </p>
+                            <p className="text-xs text-sky">
+                              {t("services.from")} {formatPrice(service.base_price, locale)}
+                            </p>
+                          </div>
                         </div>
                         {line ? (
                           <div className="flex items-center gap-2">

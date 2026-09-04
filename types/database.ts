@@ -102,6 +102,16 @@ export type ServiceRow = {
   is_haute_couture: boolean;
   is_active: boolean;
   sort_order: number;
+  image_url: string | null;
+}
+
+export type OrderMessageRow = {
+  id: string;
+  order_id: string;
+  sender_id: string;
+  sender_role: UserRole;
+  body: string;
+  created_at: string;
 }
 
 export type SchedulePricingRow = {
@@ -263,6 +273,7 @@ export type Database = {
       order_status_history: Table<OrderStatusHistoryRow, "id" | "created_at">;
       payments: Table<PaymentRow, "id" | "status" | "created_at">;
       driver_tasks: Table<DriverTaskRow, "id" | "status" | "created_at">;
+      order_messages: Table<OrderMessageRow, "id" | "created_at">;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

@@ -18,11 +18,12 @@ export default async function CustomerOrderDetailPage({ params }: { params: Prom
   const { data: order } = await supabase.from("orders").select("*").eq("id", orderId).eq("customer_id", user.id).single();
   if (!order) notFound();
 
-  const [{ data: address }, { data: branch }, { data: items }, { data: payments }] = await Promise.all([
+  const [{ data: address }, { data: branch }, { data: items }, { data: payments }, { data: messages }] = await Promise.all([
     supabase.from("addresses").select("*").eq("id", order.address_id).single(),
     supabase.from("branches").select("name").eq("id", order.branch_id).single(),
     supabase.from("order_items").select("*").eq("order_id", orderId).order("item_index"),
     supabase.from("payments").select("*").eq("order_id", orderId).order("created_at", { ascending: false }),
+    supabase.from("order_messages").select("*").eq("order_id", orderId).order("created_at"),
   ]);
 
   const serviceIds = [...new Set((items ?? []).map((i) => i.service_id))];
@@ -56,6 +57,8 @@ export default async function CustomerOrderDetailPage({ params }: { params: Prom
         };
       })}
       payments={payments ?? []}
+      messages={messages ?? []}
+      currentUserId={user.id}
     />
   );
 }

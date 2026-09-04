@@ -173,6 +173,15 @@
       "cancel": "Annuler",
       "saving": "Enregistrement...",
       "backToDashboard": "Retour à mon compte"
+    },
+    "chat": {
+      "title": "Messages",
+      "empty": "Aucun message pour l'instant — envoyez-en un ci-dessous.",
+      "customer": "Client",
+      "staff": "Parisian Laundry",
+      "placeholder": "Écrire un message...",
+      "send": "Envoyer",
+      "sendFailed": "Échec de l'envoi — réessayez."
     }
   },
   "admin": {
@@ -182,6 +191,11 @@
       "scan": "Scanner",
       "users": "Utilisateurs",
       "catalog": "Catalogue"
+    },
+    "newOrderAlert": {
+      "title": "Nouvelle commande",
+      "view": "Voir",
+      "dismiss": "Fermer"
     },
     "orders": {
       "title": "Commandes",
@@ -295,6 +309,7 @@
       "hauteCouture": "Haute couture",
       "servicePlaceholderAr": "ex. قميص - كوي فقط",
       "servicePlaceholderEn": "ex. Shirt - Iron only",
+      "photo": "Photo",
       "actionFailed": "Échec de l'opération — réessayez."
     }
   },

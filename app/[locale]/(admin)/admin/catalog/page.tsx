@@ -13,7 +13,7 @@ export default async function CatalogPage() {
     supabase
       .from("services")
       .select(
-        "id, category_id, name, description, base_price, requires_fold_option, requires_starch_option, is_haute_couture, is_active, sort_order"
+        "id, category_id, name, description, base_price, requires_fold_option, requires_starch_option, is_haute_couture, is_active, sort_order, image_url"
       )
       .order("sort_order", { ascending: true }),
   ]);

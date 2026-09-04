@@ -1,6 +1,7 @@
 import { redirect } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import AdminNav from "./AdminNav";
+import NewOrderAlert from "@/components/NewOrderAlert";
 
 const STAFF_ROLES = ["staff", "admin", "super_admin"];
 
@@ -31,6 +32,7 @@ export default async function AdminLayout({
 
   return (
     <div>
+      <NewOrderAlert />
       <AdminNav role={profile.role} />
       {children}
     </div>

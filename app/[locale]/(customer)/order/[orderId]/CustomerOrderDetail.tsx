@@ -6,11 +6,13 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { formatPrice } from "@/lib/format";
 import StatusBadge from "@/components/StatusBadge";
+import OrderChat from "@/components/OrderChat";
 import type {
   OrderRow,
   AddressRow,
   OrderItemRow,
   OrderItemPhotoRow,
+  OrderMessageRow,
   PaymentRow,
   LocalizedText,
   FoldType,
@@ -34,18 +36,24 @@ export default function CustomerOrderDetail({
   branchName,
   items,
   payments,
+  messages,
+  currentUserId,
 }: {
   order: OrderRow;
   address: AddressRow | null;
   branchName: LocalizedText | null;
   items: ItemWithExtras[];
   payments: PaymentRow[];
+  messages: OrderMessageRow[];
+  currentUserId: string;
 }) {
   const t = useTranslations("order.detail");
   const ts = useTranslations("status.order");
   const locale = useLocale() as "ar" | "en" | "fr";
 
-  const editable = order.status === "pending_confirmation" || order.status === "confirmed";
+  // Matches the DB write policy (05_service_images_chat_and_edit_lock.sql):
+  // customer can edit item options only up to staff confirmation, not after.
+  const editable = order.status === "pending_confirmation";
   const latestPayment = payments[0];
   const awaitingReview = latestPayment && latestPayment.provider === "whish" && latestPayment.status === "pending" && !!latestPayment.proof_photo_url;
 
@@ -86,11 +94,15 @@ export default function CustomerOrderDetail({
 
       {!editable && <p className="mb-3 text-xs text-navy/60">{t("editLocked")}</p>}
 
-      <section className="space-y-2">
+      <section className="mb-5 space-y-2">
         {items.map((item) => (
           <ItemCard key={item.id} item={item} locale={locale} editable={editable} />
         ))}
       </section>
+
+      <div className="mb-6">
+        <OrderChat orderId={order.id} currentUserId={currentUserId} senderRole="customer" initialMessages={messages} />
+      </div>
 
       <Link href="/dashboard" className="mt-6 inline-block text-sm text-navy hover:underline">
         {t("backToDashboard")}

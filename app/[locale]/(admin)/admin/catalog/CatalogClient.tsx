@@ -279,7 +279,7 @@ function NewServiceForm({
         is_haute_couture: haute,
         sort_order: nextSortOrder,
       })
-      .select("id, category_id, name, description, base_price, requires_fold_option, requires_starch_option, is_haute_couture, is_active, sort_order")
+      .select("id, category_id, name, description, base_price, requires_fold_option, requires_starch_option, is_haute_couture, is_active, sort_order, image_url")
       .single();
     setBusy(false);
     if (err || !data) {
@@ -350,6 +350,7 @@ function ServiceRowCard({
   const [names, setNames] = useState(service.name);
   const [price, setPrice] = useState(String(service.base_price));
   const [busy, setBusy] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   async function save() {
     setBusy(true);
@@ -370,21 +371,53 @@ function ServiceRowCard({
     await supabase.from("services").update({ is_active: next }).eq("id", service.id);
   }
 
+  async function uploadImage(file: File) {
+    setUploading(true);
+    const ext = file.name.split(".").pop() || "jpg";
+    const path = `${service.id}-${Date.now()}.${ext}`;
+    const { error: uploadErr } = await supabase.storage.from("service-images").upload(path, file, { upsert: true });
+    if (!uploadErr) {
+      const { data } = supabase.storage.from("service-images").getPublicUrl(path);
+      const { error: updateErr } = await supabase.from("services").update({ image_url: data.publicUrl }).eq("id", service.id);
+      if (!updateErr) onChange({ image_url: data.publicUrl });
+    }
+    setUploading(false);
+  }
+
   return (
     <div className={`flex flex-wrap items-center justify-between gap-3 rounded-xl border border-sky-light/70 bg-white px-3 py-2.5 ${!service.is_active ? "opacity-60" : ""}`}>
-      {editing ? (
-        <div className="grid flex-1 gap-2 sm:grid-cols-4">
-          <input dir="rtl" value={names.ar} onChange={(e) => setNames({ ...names, ar: e.target.value })} className={inputCls} />
-          <input value={names.en} onChange={(e) => setNames({ ...names, en: e.target.value })} className={inputCls} />
-          <input value={names.fr} onChange={(e) => setNames({ ...names, fr: e.target.value })} className={inputCls} />
-          <input type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className={smallInputCls} />
-        </div>
-      ) : (
-        <div>
-          <p className="text-sm font-medium text-navy-dark">{service.name[locale] ?? service.name.en}</p>
-          <p className="text-xs text-navy-dark/60">${service.base_price.toFixed(2)}</p>
-        </div>
-      )}
+      <div className="flex items-center gap-3">
+        <label className="relative shrink-0 cursor-pointer">
+          {service.image_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={service.image_url} alt="" className="h-12 w-12 rounded-lg border border-sky-light object-cover" />
+          ) : (
+            <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-dashed border-navy-dark/25 text-[10px] text-navy-dark/40">
+              {uploading ? "…" : t("photo")}
+            </span>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+            onChange={(e) => e.target.files?.[0] && uploadImage(e.target.files[0])}
+          />
+        </label>
+
+        {editing ? (
+          <div className="grid flex-1 gap-2 sm:grid-cols-4">
+            <input dir="rtl" value={names.ar} onChange={(e) => setNames({ ...names, ar: e.target.value })} className={inputCls} />
+            <input value={names.en} onChange={(e) => setNames({ ...names, en: e.target.value })} className={inputCls} />
+            <input value={names.fr} onChange={(e) => setNames({ ...names, fr: e.target.value })} className={inputCls} />
+            <input type="number" min="0" step="0.01" value={price} onChange={(e) => setPrice(e.target.value)} className={smallInputCls} />
+          </div>
+        ) : (
+          <div>
+            <p className="text-sm font-medium text-navy-dark">{service.name[locale] ?? service.name.en}</p>
+            <p className="text-xs text-navy-dark/60">${service.base_price.toFixed(2)}</p>
+          </div>
+        )}
+      </div>
 
       <div className="flex items-center gap-2">
         {editing ? (

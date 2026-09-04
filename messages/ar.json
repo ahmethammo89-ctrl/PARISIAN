@@ -173,6 +173,15 @@
       "cancel": "إلغاء",
       "saving": "جارٍ الحفظ...",
       "backToDashboard": "العودة لحسابي"
+    },
+    "chat": {
+      "title": "الرسائل",
+      "empty": "لا توجد رسائل بعد — أرسل واحدة أدناه.",
+      "customer": "العميل",
+      "staff": "المصبغة الباريسية",
+      "placeholder": "اكتب رسالة...",
+      "send": "إرسال",
+      "sendFailed": "تعذّر الإرسال — حاول مرة أخرى."
     }
   },
   "admin": {
@@ -182,6 +191,11 @@
       "scan": "المسح",
       "users": "المستخدمون",
       "catalog": "الخدمات"
+    },
+    "newOrderAlert": {
+      "title": "طلب جديد",
+      "view": "عرض",
+      "dismiss": "إغلاق"
     },
     "orders": {
       "title": "الطلبات",
@@ -295,6 +309,7 @@
       "hauteCouture": "عناية فاخرة",
       "servicePlaceholderAr": "مثال: قميص - كوي فقط",
       "servicePlaceholderEn": "e.g. Shirt - Iron only",
+      "photo": "صورة",
       "actionFailed": "لم تنجح العملية — حاول مرة أخرى."
     }
   },
