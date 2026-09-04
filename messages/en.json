@@ -53,10 +53,29 @@
     "driverWelcome": "Driver — {name}",
     "comingSoon": "More is on the way.",
     "newOrder": "Place a new order",
+    "menuAndPrices": "Menu & prices",
     "viewAllOrders": "View all orders",
     "scanItem": "Scan an item",
     "myOrders": "My orders",
     "noOrders": "No orders yet."
+  },
+  "menu": {
+    "title": "Menu & Prices",
+    "empty": "The menu isn't available right now."
+  },
+  "support": {
+    "title": "Messages",
+    "empty": "No messages yet — if something's wrong, tell us here and we'll get right on it.",
+    "customer": "Customer",
+    "staff": "Parisian Laundry",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "sendFailed": "Couldn't send — try again.",
+    "recordStart": "Record a voice message",
+    "recording": "Recording... {seconds}",
+    "cancelRecording": "Cancel",
+    "sendRecording": "Send",
+    "micError": "Couldn't access the microphone — check permissions, or type your message instead."
   },
   "order": {
     "title": "New Order",
@@ -190,12 +209,21 @@
       "orders": "Orders",
       "scan": "Scan",
       "users": "Users",
-      "catalog": "Catalog"
+      "catalog": "Catalog",
+      "messages": "Messages"
     },
     "newOrderAlert": {
       "title": "New order",
+      "complaintTitle": "New message",
+      "voiceMessage": "🎤 Voice message",
       "view": "View",
       "dismiss": "Dismiss"
+    },
+    "messages": {
+      "title": "Messages",
+      "empty": "No conversations yet.",
+      "voiceMessage": "🎤 Voice message",
+      "backToList": "Back to messages"
     },
     "orders": {
       "title": "Orders",

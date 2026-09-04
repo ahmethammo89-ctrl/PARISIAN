@@ -7,7 +7,7 @@ import type { UserRole } from "@/types/database";
 const ADMIN_ROLES: UserRole[] = ["admin", "super_admin"];
 
 const ITEMS: {
-  href: "/admin/dashboard" | "/admin/orders" | "/admin/scan" | "/admin/catalog" | "/admin/users";
+  href: "/admin/dashboard" | "/admin/orders" | "/admin/scan" | "/admin/catalog" | "/admin/messages" | "/admin/users";
   key: string;
   adminOnly?: boolean;
 }[] = [
@@ -15,6 +15,7 @@ const ITEMS: {
   { href: "/admin/orders", key: "orders" },
   { href: "/admin/scan", key: "scan" },
   { href: "/admin/catalog", key: "catalog" },
+  { href: "/admin/messages", key: "messages" },
   { href: "/admin/users", key: "users", adminOnly: true },
 ];
 

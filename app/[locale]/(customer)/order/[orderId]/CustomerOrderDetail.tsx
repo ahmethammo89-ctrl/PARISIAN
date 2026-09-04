@@ -6,13 +6,11 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { formatPrice } from "@/lib/format";
 import StatusBadge from "@/components/StatusBadge";
-import OrderChat from "@/components/OrderChat";
 import type {
   OrderRow,
   AddressRow,
   OrderItemRow,
   OrderItemPhotoRow,
-  OrderMessageRow,
   PaymentRow,
   LocalizedText,
   FoldType,
@@ -36,16 +34,12 @@ export default function CustomerOrderDetail({
   branchName,
   items,
   payments,
-  messages,
-  currentUserId,
 }: {
   order: OrderRow;
   address: AddressRow | null;
   branchName: LocalizedText | null;
   items: ItemWithExtras[];
   payments: PaymentRow[];
-  messages: OrderMessageRow[];
-  currentUserId: string;
 }) {
   const t = useTranslations("order.detail");
   const ts = useTranslations("status.order");
@@ -99,10 +93,6 @@ export default function CustomerOrderDetail({
           <ItemCard key={item.id} item={item} locale={locale} editable={editable} />
         ))}
       </section>
-
-      <div className="mb-6">
-        <OrderChat orderId={order.id} currentUserId={currentUserId} senderRole="customer" initialMessages={messages} />
-      </div>
 
       <Link href="/dashboard" className="mt-6 inline-block text-sm text-navy hover:underline">
         {t("backToDashboard")}

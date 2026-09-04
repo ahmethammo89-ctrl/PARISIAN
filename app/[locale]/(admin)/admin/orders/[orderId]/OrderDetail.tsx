@@ -7,13 +7,11 @@ import { Link } from "@/i18n/navigation";
 import { formatPrice, isPhoneLike } from "@/lib/format";
 import { orderStatusOptions, itemStatusOptions } from "@/lib/orderFlow";
 import StatusBadge from "@/components/StatusBadge";
-import OrderChat from "@/components/OrderChat";
 import type {
   OrderRow,
   AddressRow,
   OrderItemRow,
   OrderItemPhotoRow,
-  OrderMessageRow,
   OrderStatusHistoryRow,
   PaymentRow,
   DriverTaskRow,
@@ -21,7 +19,6 @@ import type {
   OrderStatus,
   ItemStatus,
   DriverTaskType,
-  UserRole,
 } from "@/types/database";
 
 type ItemWithExtras = OrderItemRow & {
@@ -44,9 +41,6 @@ export default function OrderDetail({
   payments,
   tasks,
   drivers,
-  messages,
-  currentUserId,
-  currentUserRole,
 }: {
   order: OrderRow;
   customer: { full_name: string | null; phone: string } | null;
@@ -58,9 +52,6 @@ export default function OrderDetail({
   payments: PaymentWithProof[];
   tasks: DriverTaskRow[];
   drivers: { id: string; full_name: string | null; phone: string }[];
-  messages: OrderMessageRow[];
-  currentUserId: string;
-  currentUserRole: UserRole;
 }) {
   const t = useTranslations("admin.orderDetail");
   const ts = useTranslations("status.order");
@@ -362,11 +353,6 @@ export default function OrderDetail({
           ))}
         </div>
       </section>
-
-      {/* Chat */}
-      <div className="mb-5">
-        <OrderChat orderId={order.id} currentUserId={currentUserId} senderRole={currentUserRole} initialMessages={messages} />
-      </div>
 
       {/* History */}
       <section className="rounded-2xl border border-sky-light bg-base-soft p-4">

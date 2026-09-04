@@ -114,6 +114,17 @@ export type OrderMessageRow = {
   created_at: string;
 }
 
+/** General customer <-> staff "Messages / Complaints" thread, one per customer (not tied to an order). */
+export type SupportMessageRow = {
+  id: string;
+  customer_id: string;
+  sender_id: string;
+  sender_role: UserRole;
+  body: string | null;
+  audio_path: string | null;
+  created_at: string;
+}
+
 export type SchedulePricingRow = {
   schedule_type: ScheduleType;
   label: LocalizedText;
@@ -274,6 +285,7 @@ export type Database = {
       payments: Table<PaymentRow, "id" | "status" | "created_at">;
       driver_tasks: Table<DriverTaskRow, "id" | "status" | "created_at">;
       order_messages: Table<OrderMessageRow, "id" | "created_at">;
+      support_messages: Table<SupportMessageRow, "id" | "created_at">;
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;

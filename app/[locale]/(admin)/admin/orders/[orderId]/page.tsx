@@ -10,13 +10,7 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
   const { data: order } = await supabase.from("orders").select("*").eq("id", orderId).single();
   if (!order) notFound();
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) notFound();
-  const { data: viewerProfile } = await supabase.from("profiles").select("role").eq("id", user.id).single();
-
-  const [{ data: customer }, { data: address }, { data: branch }, { data: items }, { data: history }, { data: payments }, { data: tasks }, { data: drivers }, { data: messages }] =
+  const [{ data: customer }, { data: address }, { data: branch }, { data: items }, { data: history }, { data: payments }, { data: tasks }, { data: drivers }] =
     await Promise.all([
       supabase.from("profiles").select("full_name, phone").eq("id", order.customer_id).single(),
       supabase.from("addresses").select("*").eq("id", order.address_id).single(),
@@ -26,7 +20,6 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
       supabase.from("payments").select("*").eq("order_id", orderId).order("created_at", { ascending: false }),
       supabase.from("driver_tasks").select("*").eq("order_id", orderId),
       supabase.from("profiles").select("id, full_name, phone").eq("role", "driver").eq("is_active", true),
-      supabase.from("order_messages").select("*").eq("order_id", orderId).order("created_at"),
     ]);
 
   const serviceIds = [...new Set((items ?? []).map((i) => i.service_id))];
@@ -74,9 +67,6 @@ export default async function AdminOrderDetailPage({ params }: { params: Promise
       }))}
       tasks={tasks ?? []}
       drivers={drivers ?? []}
-      messages={messages ?? []}
-      currentUserId={user.id}
-      currentUserRole={viewerProfile?.role ?? "staff"}
     />
   );
 }

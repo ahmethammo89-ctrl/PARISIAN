@@ -53,10 +53,29 @@
     "driverWelcome": "السائق — {name}",
     "comingSoon": "المزيد قريباً.",
     "newOrder": "إنشاء طلب جديد",
+    "menuAndPrices": "المنيو والأسعار",
     "viewAllOrders": "عرض جميع الطلبات",
     "scanItem": "مسح قطعة",
     "myOrders": "طلباتي",
     "noOrders": "ما في طلبات بعد."
+  },
+  "menu": {
+    "title": "المنيو والأسعار",
+    "empty": "المنيو مش متوفر هلق."
+  },
+  "support": {
+    "title": "الرسائل",
+    "empty": "لا رسائل بعد — إذا في شي مش مظبوط، احكيلنا هون وبنعالجه فوراً.",
+    "customer": "الزبون",
+    "staff": "المصبغة الباريسية",
+    "placeholder": "اكتب رسالة...",
+    "send": "إرسال",
+    "sendFailed": "تعذّر الإرسال — حاول مرة أخرى.",
+    "recordStart": "تسجيل رسالة صوتية",
+    "recording": "جارٍ التسجيل... {seconds}",
+    "cancelRecording": "إلغاء",
+    "sendRecording": "إرسال",
+    "micError": "تعذّر الوصول للمايكروفون — تحقق من الصلاحيات، أو اكتب رسالتك بدلاً من ذلك."
   },
   "order": {
     "title": "طلب جديد",
@@ -190,12 +209,21 @@
       "orders": "الطلبات",
       "scan": "المسح",
       "users": "المستخدمون",
-      "catalog": "الخدمات"
+      "catalog": "الخدمات",
+      "messages": "الرسائل"
     },
     "newOrderAlert": {
       "title": "طلب جديد",
+      "complaintTitle": "رسالة جديدة",
+      "voiceMessage": "🎤 رسالة صوتية",
       "view": "عرض",
       "dismiss": "إغلاق"
+    },
+    "messages": {
+      "title": "الرسائل",
+      "empty": "لا محادثات بعد.",
+      "voiceMessage": "🎤 رسالة صوتية",
+      "backToList": "العودة للرسائل"
     },
     "orders": {
       "title": "الطلبات",
