@@ -1,0 +1,238 @@
+{
+  "common": {
+    "appName": "Parisian Laundry",
+    "tagline": "Luxury Care",
+    "loading": "Loading...",
+    "back": "Back",
+    "logout": "Log out"
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "loginSubtitle": "Sign in with your phone number",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+961 70 000 000",
+    "sendCode": "Send verification code",
+    "sending": "Sending...",
+    "verifyTitle": "Enter the code",
+    "verifySubtitle": "We sent a 6-digit code to {phone}",
+    "codeLabel": "Verification code",
+    "verifyButton": "Verify & continue",
+    "verifying": "Verifying...",
+    "resendCode": "Resend code",
+    "changeNumber": "Change number",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorInvalidCode": "Invalid or expired code."
+  },
+  "nav": {
+    "customer": "My Account",
+    "admin": "Admin",
+    "driver": "Driver"
+  },
+  "dashboard": {
+    "customerWelcome": "Welcome, {name}",
+    "adminWelcome": "Admin dashboard — {name}",
+    "driverWelcome": "Driver — {name}",
+    "comingSoon": "More is on the way.",
+    "newOrder": "Place a new order",
+    "viewAllOrders": "View all orders",
+    "scanItem": "Scan an item"
+  },
+  "order": {
+    "title": "New Order",
+    "steps": {
+      "services": "Services",
+      "customize": "Customize",
+      "schedule": "Schedule",
+      "review": "Review"
+    },
+    "next": "Continue",
+    "back": "Back",
+    "cartEmpty": "Your bag is empty — add a service to begin.",
+    "services": {
+      "haute": "Haute Couture",
+      "add": "Add",
+      "inCart": "{count} in bag",
+      "from": "from"
+    },
+    "cart": {
+      "title": "Your bag",
+      "remove": "Remove",
+      "qty": "Qty"
+    },
+    "customize": {
+      "lineTitle": "{service} · {count, plural, one {# item} other {# items}}",
+      "foldType": "Handling",
+      "folded": "Folded",
+      "hanger": "On hanger",
+      "starchLevel": "Starch",
+      "starchNone": "None",
+      "starchLight": "Light",
+      "starchMedium": "Medium",
+      "starchHeavy": "Heavy",
+      "itemLabel": "Item {n} of {total}",
+      "addPhoto": "Add photo",
+      "retakePhoto": "Change",
+      "addNote": "Add a note",
+      "notePlaceholder": "e.g. small stain near the collar",
+      "photoHint": "One photo per item helps us track it and match it back to you."
+    },
+    "schedule": {
+      "title": "When do you need it?",
+      "normalTitle": "Normal",
+      "expressTitle": "Express",
+      "urgentTitle": "Urgent",
+      "turnaround": "~{hours}h turnaround",
+      "noFee": "No extra fee",
+      "extraFee": "+{percent}% fee"
+    },
+    "branch": {
+      "title": "Preferred branch"
+    },
+    "address": {
+      "title": "Pickup & delivery address",
+      "addNew": "Add a new address",
+      "label": "Label (e.g. Home, Office)",
+      "addressLine": "Address",
+      "building": "Building",
+      "floor": "Floor",
+      "city": "City",
+      "save": "Save address",
+      "saving": "Saving...",
+      "noAddresses": "No saved addresses yet — add one below."
+    },
+    "review": {
+      "title": "Review & pay",
+      "subtotal": "Subtotal",
+      "scheduleFee": "Schedule fee",
+      "total": "Total",
+      "notesLabel": "Notes for us (optional)",
+      "notesPlaceholder": "Anything our team should know?",
+      "placeOrder": "Place order",
+      "placing": "Placing your order...",
+      "uploadingPhotos": "Uploading photos..."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "selectAddress": "Please select or add an address",
+      "selectSchedule": "Please choose a schedule"
+    },
+    "pay": {
+      "title": "Order {orderNumber}",
+      "totalDue": "Total due",
+      "payWhish": "Pay with Whish Money",
+      "payCash": "Cash on delivery",
+      "whatsapp": "Send order via WhatsApp",
+      "processing": "Processing...",
+      "cashConfirmed": "Order confirmed — pay when it's delivered.",
+      "mockBanner": "Test mode — Whish Money credentials aren't configured yet.",
+      "mockTitle": "Simulated Whish checkout",
+      "mockDesc": "This stands in for the real Whish Money payment screen until live credentials are connected.",
+      "simulateSuccess": "Simulate successful payment",
+      "paid": "Payment received — thank you!",
+      "backToDashboard": "Back to my account"
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "orders": "Orders",
+      "scan": "Scan"
+    },
+    "orders": {
+      "title": "Orders",
+      "empty": "No orders match these filters.",
+      "searchPlaceholder": "Search order # or phone",
+      "allStatuses": "All statuses",
+      "allBranches": "All branches"
+    },
+    "orderDetail": {
+      "actionFailed": "That didn't go through — please try again.",
+      "customer": "Customer",
+      "orderStatus": "Order status",
+      "saving": "Saving...",
+      "moveTo": "Move to",
+      "noFurtherActions": "This order has reached its final status.",
+      "driverAssignment": "Driver assignment",
+      "pickup": "Pickup",
+      "dropoff": "Delivery",
+      "chooseDriver": "Choose a driver",
+      "assign": "Assign",
+      "reassign": "Reassign",
+      "items": "Items",
+      "openInScan": "Open in scanner",
+      "payments": "Payments",
+      "total": "Total",
+      "noPayments": "No payment recorded yet.",
+      "history": "Status history",
+      "printTags": "Print QR tags"
+    },
+    "scan": {
+      "title": "Scan item",
+      "inputPlaceholder": "Scan or type barcode",
+      "go": "Look up",
+      "looking": "Looking up...",
+      "scanCamera": "Scan with camera",
+      "hidHint": "Works with a USB/Bluetooth barcode scanner too — just scan into the field above.",
+      "notFound": "No item matches that code.",
+      "actionFailed": "That didn't go through — please try again.",
+      "saving": "Saving...",
+      "photoIntake": "Intake photo",
+      "photoDelivery": "Delivery photo",
+      "addStaffPhoto": "Add staff photo",
+      "cameraError": "Camera unavailable — check permissions, or type the code instead.",
+      "close": "Close"
+    },
+    "tags": {
+      "title": "Item tags",
+      "print": "Print",
+      "empty": "This order has no items yet."
+    }
+  },
+  "driver": {
+    "tasks": {
+      "active": "Active tasks",
+      "noActive": "No active tasks right now.",
+      "completed": "Completed",
+      "pickup": "Pickup",
+      "dropoff": "Delivery",
+      "navigate": "Navigate",
+      "call": "Call",
+      "actionFailed": "That didn't go through — please try again.",
+      "saving": "Saving...",
+      "markAs": {
+        "assigned": "Reset",
+        "en_route": "Start — en route",
+        "completed": "Mark completed",
+        "failed": "Mark failed"
+      }
+    }
+  },
+  "status": {
+    "order": {
+      "pending_confirmation": "Pending confirmation",
+      "confirmed": "Confirmed",
+      "picked_up": "Picked up",
+      "in_processing": "In processing",
+      "ready_for_delivery": "Ready for delivery",
+      "out_for_delivery": "Out for delivery",
+      "delivered": "Delivered",
+      "cancelled": "Cancelled"
+    },
+    "item": {
+      "registered": "Registered",
+      "tagged": "Tagged",
+      "in_processing": "In processing",
+      "cleaned": "Cleaned",
+      "ready": "Ready",
+      "delivered": "Delivered",
+      "lost": "Lost",
+      "damaged": "Damaged"
+    },
+    "driverTask": {
+      "assigned": "Assigned",
+      "en_route": "En route",
+      "completed": "Completed",
+      "failed": "Failed"
+    }
+  }
+}

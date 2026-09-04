@@ -1,0 +1,238 @@
+{
+  "common": {
+    "appName": "المصبغة الباريسية",
+    "tagline": "عناية فاخرة",
+    "loading": "جارٍ التحميل...",
+    "back": "رجوع",
+    "logout": "تسجيل الخروج"
+  },
+  "auth": {
+    "loginTitle": "أهلاً بعودتك",
+    "loginSubtitle": "سجّل الدخول برقم هاتفك",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "+961 70 000 000",
+    "sendCode": "إرسال رمز التحقق",
+    "sending": "جارٍ الإرسال...",
+    "verifyTitle": "أدخل الرمز",
+    "verifySubtitle": "أرسلنا رمزاً مؤلفاً من 6 أرقام إلى {phone}",
+    "codeLabel": "رمز التحقق",
+    "verifyButton": "تحقق وتابع",
+    "verifying": "جارٍ التحقق...",
+    "resendCode": "إعادة إرسال الرمز",
+    "changeNumber": "تغيير الرقم",
+    "errorGeneric": "حدث خطأ ما. حاول مرة أخرى.",
+    "errorInvalidCode": "الرمز غير صحيح أو منتهي الصلاحية."
+  },
+  "nav": {
+    "customer": "حسابي",
+    "admin": "الإدارة",
+    "driver": "السائق"
+  },
+  "dashboard": {
+    "customerWelcome": "أهلاً، {name}",
+    "adminWelcome": "لوحة الإدارة — {name}",
+    "driverWelcome": "السائق — {name}",
+    "comingSoon": "المزيد قريباً.",
+    "newOrder": "إنشاء طلب جديد",
+    "viewAllOrders": "عرض جميع الطلبات",
+    "scanItem": "مسح قطعة"
+  },
+  "order": {
+    "title": "طلب جديد",
+    "steps": {
+      "services": "الخدمات",
+      "customize": "التخصيص",
+      "schedule": "الموعد",
+      "review": "المراجعة"
+    },
+    "next": "متابعة",
+    "back": "رجوع",
+    "cartEmpty": "حقيبتك فارغة — أضف خدمة للبدء.",
+    "services": {
+      "haute": "عناية فاخرة (Haute Couture)",
+      "add": "إضافة",
+      "inCart": "{count} بالحقيبة",
+      "from": "ابتداءً من"
+    },
+    "cart": {
+      "title": "حقيبتك",
+      "remove": "إزالة",
+      "qty": "الكمية"
+    },
+    "customize": {
+      "lineTitle": "{service} · {count, plural, one {قطعة واحدة} other {# قطع}}",
+      "foldType": "طريقة الطي",
+      "folded": "مطوي",
+      "hanger": "على شماعة",
+      "starchLevel": "النشا",
+      "starchNone": "بدون",
+      "starchLight": "خفيف",
+      "starchMedium": "متوسط",
+      "starchHeavy": "قوي",
+      "itemLabel": "القطعة {n} من {total}",
+      "addPhoto": "إضافة صورة",
+      "retakePhoto": "تغيير",
+      "addNote": "إضافة ملاحظة",
+      "notePlaceholder": "مثال: بقعة صغيرة قرب الياقة",
+      "photoHint": "صورة لكل قطعة تساعدنا نتتبعها ونربطها فيك بدقة."
+    },
+    "schedule": {
+      "title": "بدك ياها إمتى؟",
+      "normalTitle": "عادي",
+      "expressTitle": "سريع",
+      "urgentTitle": "مستعجل",
+      "turnaround": "خلال ~{hours} ساعة",
+      "noFee": "بدون رسوم إضافية",
+      "extraFee": "+{percent}% رسوم"
+    },
+    "branch": {
+      "title": "الفرع المفضل"
+    },
+    "address": {
+      "title": "عنوان الاستلام والتسليم",
+      "addNew": "إضافة عنوان جديد",
+      "label": "الاسم (مثال: المنزل، المكتب)",
+      "addressLine": "العنوان",
+      "building": "المبنى",
+      "floor": "الطابق",
+      "city": "المدينة",
+      "save": "حفظ العنوان",
+      "saving": "جارٍ الحفظ...",
+      "noAddresses": "ما في عناوين محفوظة بعد — أضف واحداً بالأسفل."
+    },
+    "review": {
+      "title": "المراجعة والدفع",
+      "subtotal": "المجموع الفرعي",
+      "scheduleFee": "رسوم الموعد",
+      "total": "الإجمالي",
+      "notesLabel": "ملاحظات لنا (اختياري)",
+      "notesPlaceholder": "في شي بدك يعرفه فريقنا؟",
+      "placeOrder": "تأكيد الطلب",
+      "placing": "جارٍ إرسال طلبك...",
+      "uploadingPhotos": "جارٍ رفع الصور..."
+    },
+    "errors": {
+      "generic": "حدث خطأ ما. حاول مرة أخرى.",
+      "selectAddress": "الرجاء اختيار أو إضافة عنوان",
+      "selectSchedule": "الرجاء اختيار الموعد"
+    },
+    "pay": {
+      "title": "الطلب {orderNumber}",
+      "totalDue": "المبلغ المستحق",
+      "payWhish": "الدفع عبر Whish Money",
+      "payCash": "الدفع نقداً عند التسليم",
+      "whatsapp": "إرسال الطلب عبر واتساب",
+      "processing": "جارٍ المعالجة...",
+      "cashConfirmed": "تم تأكيد الطلب — الدفع عند التسليم.",
+      "mockBanner": "وضع تجريبي — بيانات Whish Money لسا ما انضبطت.",
+      "mockTitle": "محاكاة صفحة الدفع عبر Whish",
+      "mockDesc": "هاي الصفحة بديلة مؤقتة لصفحة الدفع الحقيقية لحد ما يتم ربط بيانات Whish Money الفعلية.",
+      "simulateSuccess": "محاكاة دفع ناجح",
+      "paid": "تم استلام الدفعة — شكراً لك!",
+      "backToDashboard": "العودة لحسابي"
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "الرئيسية",
+      "orders": "الطلبات",
+      "scan": "المسح"
+    },
+    "orders": {
+      "title": "الطلبات",
+      "empty": "لا توجد طلبات مطابقة لهذه الفلاتر.",
+      "searchPlaceholder": "ابحث برقم الطلب أو الهاتف",
+      "allStatuses": "كل الحالات",
+      "allBranches": "كل الفروع"
+    },
+    "orderDetail": {
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى.",
+      "customer": "الزبون",
+      "orderStatus": "حالة الطلب",
+      "saving": "جارٍ الحفظ...",
+      "moveTo": "نقل إلى",
+      "noFurtherActions": "وصل هذا الطلب إلى حالته النهائية.",
+      "driverAssignment": "تعيين السائق",
+      "pickup": "الاستلام",
+      "dropoff": "التسليم",
+      "chooseDriver": "اختر سائقاً",
+      "assign": "تعيين",
+      "reassign": "إعادة تعيين",
+      "items": "القطع",
+      "openInScan": "فتح في الماسح",
+      "payments": "الدفعات",
+      "total": "الإجمالي",
+      "noPayments": "لا توجد دفعة مسجّلة بعد.",
+      "history": "سجل الحالة",
+      "printTags": "طباعة ملصقات QR"
+    },
+    "scan": {
+      "title": "مسح قطعة",
+      "inputPlaceholder": "امسح الباركود أو اكتبه",
+      "go": "بحث",
+      "looking": "جارٍ البحث...",
+      "scanCamera": "المسح بالكاميرا",
+      "hidHint": "يعمل أيضاً مع ماسح باركود USB/بلوتوث — فقط امسح داخل الحقل أعلاه.",
+      "notFound": "لا توجد قطعة مطابقة لهذا الرمز.",
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى.",
+      "saving": "جارٍ الحفظ...",
+      "photoIntake": "صورة الاستلام",
+      "photoDelivery": "صورة التسليم",
+      "addStaffPhoto": "إضافة صورة من الموظف",
+      "cameraError": "الكاميرا غير متاحة — تحقق من الأذونات، أو اكتب الرمز يدوياً.",
+      "close": "إغلاق"
+    },
+    "tags": {
+      "title": "ملصقات القطع",
+      "print": "طباعة",
+      "empty": "لا توجد قطع في هذا الطلب بعد."
+    }
+  },
+  "driver": {
+    "tasks": {
+      "active": "المهام الحالية",
+      "noActive": "لا توجد مهام حالياً.",
+      "completed": "المكتملة",
+      "pickup": "استلام",
+      "dropoff": "تسليم",
+      "navigate": "الاتجاهات",
+      "call": "اتصال",
+      "actionFailed": "لم تنجح العملية — حاول مرة أخرى.",
+      "saving": "جارٍ الحفظ...",
+      "markAs": {
+        "assigned": "إعادة ضبط",
+        "en_route": "بدء التنقل",
+        "completed": "تحديد كمكتمل",
+        "failed": "تحديد كفاشل"
+      }
+    }
+  },
+  "status": {
+    "order": {
+      "pending_confirmation": "بانتظار التأكيد",
+      "confirmed": "مؤكد",
+      "picked_up": "تم الاستلام",
+      "in_processing": "قيد المعالجة",
+      "ready_for_delivery": "جاهز للتسليم",
+      "out_for_delivery": "في الطريق للتسليم",
+      "delivered": "تم التسليم",
+      "cancelled": "ملغى"
+    },
+    "item": {
+      "registered": "مسجّل",
+      "tagged": "معلّم",
+      "in_processing": "قيد المعالجة",
+      "cleaned": "منظّف",
+      "ready": "جاهز",
+      "delivered": "تم التسليم",
+      "lost": "مفقود",
+      "damaged": "تالف"
+    },
+    "driverTask": {
+      "assigned": "معيّنة",
+      "en_route": "في الطريق",
+      "completed": "مكتملة",
+      "failed": "فاشلة"
+    }
+  }
+}

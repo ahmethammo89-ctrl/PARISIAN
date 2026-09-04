@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&family=Cairo:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+
+/*
+ * Brand tokens extracted from the real logo (public/logo.png) and
+ * business card — sampled pixel values, not guesses:
+ *   sky wash / card bg  #8eb7df
+ *   ring / mid accent   #6391cb
+ *   navy dot (primary)  #4566a7  (5.66:1 on white — passes AA text)
+ *   teal (business card) #6bb6ce
+ * --navy-dark is a deliberately deepened navy (9.19:1) for hover/active
+ * states and anywhere the base navy's contrast needs headroom.
+ */
+@theme {
+  --color-navy: #4566a7;
+  --color-navy-dark: #2c4874;
+  --color-sky: #6391cb;
+  --color-sky-light: #a7c7e4;
+  --color-sky-pale: #eaf2fb;
+  --color-teal: #6bb6ce;
+  --color-base: #ffffff;
+  --color-base-soft: #f5f9fd;
+
+  --font-heading: "Playfair Display", "Cairo", serif;
+  --font-heading-ar: "Cairo", "Playfair Display", serif;
+  --font-body: "Inter", "Cairo", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-navy-dark);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+html[lang="ar"] body {
+  font-family: "Cairo", var(--font-body);
+}
+
+html[lang="ar"] .font-heading {
+  font-family: var(--font-heading-ar);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Native-app-style momentum scrolling for horizontally swipeable rows
+   (schedule cards, per-item photo carousel). */
+.snap-x-mandatory {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Printable QR/barcode tag sheets (admin/tags/[orderId]): hide app chrome,
+   let tag cards break cleanly across pages. */
+@media print {
+  header,
+  nav {
+    display: none !important;
+  }
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+}

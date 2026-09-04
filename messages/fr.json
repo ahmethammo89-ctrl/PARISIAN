@@ -1,0 +1,238 @@
+{
+  "common": {
+    "appName": "Parisian Laundry",
+    "tagline": "Soin de Luxe",
+    "loading": "Chargement...",
+    "back": "Retour",
+    "logout": "Déconnexion"
+  },
+  "auth": {
+    "loginTitle": "Bon retour",
+    "loginSubtitle": "Connectez-vous avec votre numéro de téléphone",
+    "phoneLabel": "Numéro de téléphone",
+    "phonePlaceholder": "+961 70 000 000",
+    "sendCode": "Envoyer le code",
+    "sending": "Envoi en cours...",
+    "verifyTitle": "Entrez le code",
+    "verifySubtitle": "Un code à 6 chiffres a été envoyé à {phone}",
+    "codeLabel": "Code de vérification",
+    "verifyButton": "Vérifier et continuer",
+    "verifying": "Vérification...",
+    "resendCode": "Renvoyer le code",
+    "changeNumber": "Changer de numéro",
+    "errorGeneric": "Une erreur est survenue. Réessayez.",
+    "errorInvalidCode": "Code invalide ou expiré."
+  },
+  "nav": {
+    "customer": "Mon compte",
+    "admin": "Admin",
+    "driver": "Chauffeur"
+  },
+  "dashboard": {
+    "customerWelcome": "Bienvenue, {name}",
+    "adminWelcome": "Tableau de bord admin — {name}",
+    "driverWelcome": "Chauffeur — {name}",
+    "comingSoon": "Plus de fonctionnalités arrivent bientôt.",
+    "newOrder": "Passer une nouvelle commande",
+    "viewAllOrders": "Voir toutes les commandes",
+    "scanItem": "Scanner un article"
+  },
+  "order": {
+    "title": "Nouvelle commande",
+    "steps": {
+      "services": "Services",
+      "customize": "Personnaliser",
+      "schedule": "Horaire",
+      "review": "Récapitulatif"
+    },
+    "next": "Continuer",
+    "back": "Retour",
+    "cartEmpty": "Votre panier est vide — ajoutez un service pour commencer.",
+    "services": {
+      "haute": "Haute Couture",
+      "add": "Ajouter",
+      "inCart": "{count} dans le panier",
+      "from": "à partir de"
+    },
+    "cart": {
+      "title": "Votre panier",
+      "remove": "Retirer",
+      "qty": "Qté"
+    },
+    "customize": {
+      "lineTitle": "{service} · {count, plural, one {# article} other {# articles}}",
+      "foldType": "Traitement",
+      "folded": "Plié",
+      "hanger": "Sur cintre",
+      "starchLevel": "Amidon",
+      "starchNone": "Aucun",
+      "starchLight": "Léger",
+      "starchMedium": "Moyen",
+      "starchHeavy": "Fort",
+      "itemLabel": "Article {n} sur {total}",
+      "addPhoto": "Ajouter une photo",
+      "retakePhoto": "Changer",
+      "addNote": "Ajouter une note",
+      "notePlaceholder": "ex. petite tache près du col",
+      "photoHint": "Une photo par article nous aide à le suivre et à vous le restituer précisément."
+    },
+    "schedule": {
+      "title": "Pour quand ?",
+      "normalTitle": "Normal",
+      "expressTitle": "Express",
+      "urgentTitle": "Urgent",
+      "turnaround": "délai ~{hours} h",
+      "noFee": "Sans frais supplémentaires",
+      "extraFee": "+{percent}% de frais"
+    },
+    "branch": {
+      "title": "Agence préférée"
+    },
+    "address": {
+      "title": "Adresse de collecte et de livraison",
+      "addNew": "Ajouter une nouvelle adresse",
+      "label": "Nom (ex. Domicile, Bureau)",
+      "addressLine": "Adresse",
+      "building": "Bâtiment",
+      "floor": "Étage",
+      "city": "Ville",
+      "save": "Enregistrer l'adresse",
+      "saving": "Enregistrement...",
+      "noAddresses": "Aucune adresse enregistrée — ajoutez-en une ci-dessous."
+    },
+    "review": {
+      "title": "Récapitulatif et paiement",
+      "subtotal": "Sous-total",
+      "scheduleFee": "Frais d'horaire",
+      "total": "Total",
+      "notesLabel": "Notes pour nous (facultatif)",
+      "notesPlaceholder": "Quelque chose à signaler à notre équipe ?",
+      "placeOrder": "Confirmer la commande",
+      "placing": "Envoi de votre commande...",
+      "uploadingPhotos": "Envoi des photos..."
+    },
+    "errors": {
+      "generic": "Une erreur est survenue. Réessayez.",
+      "selectAddress": "Veuillez sélectionner ou ajouter une adresse",
+      "selectSchedule": "Veuillez choisir un horaire"
+    },
+    "pay": {
+      "title": "Commande {orderNumber}",
+      "totalDue": "Total à payer",
+      "payWhish": "Payer avec Whish Money",
+      "payCash": "Paiement à la livraison",
+      "whatsapp": "Envoyer la commande via WhatsApp",
+      "processing": "Traitement...",
+      "cashConfirmed": "Commande confirmée — paiement à la livraison.",
+      "mockBanner": "Mode test — les identifiants Whish Money ne sont pas encore configurés.",
+      "mockTitle": "Simulation du paiement Whish",
+      "mockDesc": "Cet écran remplace la vraie page de paiement Whish Money en attendant la connexion des identifiants réels.",
+      "simulateSuccess": "Simuler un paiement réussi",
+      "paid": "Paiement reçu — merci !",
+      "backToDashboard": "Retour à mon compte"
+    }
+  },
+  "admin": {
+    "nav": {
+      "dashboard": "Tableau de bord",
+      "orders": "Commandes",
+      "scan": "Scanner"
+    },
+    "orders": {
+      "title": "Commandes",
+      "empty": "Aucune commande ne correspond à ces filtres.",
+      "searchPlaceholder": "Rechercher n° ou téléphone",
+      "allStatuses": "Tous les statuts",
+      "allBranches": "Toutes les succursales"
+    },
+    "orderDetail": {
+      "actionFailed": "Échec de l'opération — réessayez.",
+      "customer": "Client",
+      "orderStatus": "Statut de la commande",
+      "saving": "Enregistrement...",
+      "moveTo": "Passer à",
+      "noFurtherActions": "Cette commande a atteint son statut final.",
+      "driverAssignment": "Attribution du chauffeur",
+      "pickup": "Collecte",
+      "dropoff": "Livraison",
+      "chooseDriver": "Choisir un chauffeur",
+      "assign": "Attribuer",
+      "reassign": "Réattribuer",
+      "items": "Articles",
+      "openInScan": "Ouvrir dans le scanner",
+      "payments": "Paiements",
+      "total": "Total",
+      "noPayments": "Aucun paiement enregistré pour le moment.",
+      "history": "Historique du statut",
+      "printTags": "Imprimer les étiquettes QR"
+    },
+    "scan": {
+      "title": "Scanner un article",
+      "inputPlaceholder": "Scannez ou saisissez le code",
+      "go": "Rechercher",
+      "looking": "Recherche...",
+      "scanCamera": "Scanner avec la caméra",
+      "hidHint": "Fonctionne aussi avec un lecteur de codes-barres USB/Bluetooth — scannez dans le champ ci-dessus.",
+      "notFound": "Aucun article ne correspond à ce code.",
+      "actionFailed": "Échec de l'opération — réessayez.",
+      "saving": "Enregistrement...",
+      "photoIntake": "Photo de réception",
+      "photoDelivery": "Photo de livraison",
+      "addStaffPhoto": "Ajouter une photo",
+      "cameraError": "Caméra indisponible — vérifiez les autorisations ou saisissez le code.",
+      "close": "Fermer"
+    },
+    "tags": {
+      "title": "Étiquettes des articles",
+      "print": "Imprimer",
+      "empty": "Cette commande n'a pas encore d'articles."
+    }
+  },
+  "driver": {
+    "tasks": {
+      "active": "Tâches actives",
+      "noActive": "Aucune tâche active pour le moment.",
+      "completed": "Terminées",
+      "pickup": "Collecte",
+      "dropoff": "Livraison",
+      "navigate": "Itinéraire",
+      "call": "Appeler",
+      "actionFailed": "Échec de l'opération — réessayez.",
+      "saving": "Enregistrement...",
+      "markAs": {
+        "assigned": "Réinitialiser",
+        "en_route": "Démarrer — en route",
+        "completed": "Marquer terminé",
+        "failed": "Marquer échoué"
+      }
+    }
+  },
+  "status": {
+    "order": {
+      "pending_confirmation": "En attente de confirmation",
+      "confirmed": "Confirmée",
+      "picked_up": "Collectée",
+      "in_processing": "En traitement",
+      "ready_for_delivery": "Prête pour livraison",
+      "out_for_delivery": "En cours de livraison",
+      "delivered": "Livrée",
+      "cancelled": "Annulée"
+    },
+    "item": {
+      "registered": "Enregistré",
+      "tagged": "Étiqueté",
+      "in_processing": "En traitement",
+      "cleaned": "Nettoyé",
+      "ready": "Prêt",
+      "delivered": "Livré",
+      "lost": "Perdu",
+      "damaged": "Endommagé"
+    },
+    "driverTask": {
+      "assigned": "Attribuée",
+      "en_route": "En route",
+      "completed": "Terminée",
+      "failed": "Échouée"
+    }
+  }
+}
