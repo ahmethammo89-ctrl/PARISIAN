@@ -119,9 +119,11 @@ function CreateUserForm({ branches, onCreated }: { branches: Branch[]; onCreated
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullName, email, password, phone: phone || undefined, role, branchId: branchId || undefined }),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       if (!res.ok) {
-        setError(data?.error === "email_in_use" ? t("errorEmailInUse") : data?.error === "weak_password" ? t("errorWeakPassword") : t("errorCreateFailed"));
+        const base =
+          data?.error === "email_in_use" ? t("errorEmailInUse") : data?.error === "weak_password" ? t("errorWeakPassword") : t("errorCreateFailed");
+        setError(data?.detail ? `${base} (${data.detail})` : base);
         return;
       }
       onCreated({
@@ -219,11 +221,11 @@ function UserRowCard({
   const t = useTranslations("admin.users");
   const tr = useTranslations("status.role");
   const [busy, setBusy] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function patch(body: Record<string, unknown>, optimistic: Partial<UserRow>) {
     setBusy(true);
-    setError(false);
+    setError(null);
     const prev = { ...u };
     onChange(optimistic);
     try {
@@ -232,11 +234,16 @@ function UserRowCard({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      if (!res.ok) throw new Error();
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        setError(data?.detail ? `${t("actionFailed")} (${data.detail})` : t("actionFailed"));
+        onChange(prev);
+        return;
+      }
       refresh();
     } catch {
       onChange(prev);
-      setError(true);
+      setError(t("actionFailed"));
     } finally {
       setBusy(false);
     }
@@ -281,7 +288,7 @@ function UserRowCard({
       </div>
 
       {isSelf && <p className="mt-2 text-[11px] text-navy/50">{t("selfNote")}</p>}
-      {error && <p className="mt-2 text-xs text-red-700">{t("actionFailed")}</p>}
+      {error && <p className="mt-2 text-xs text-red-700">{error}</p>}
     </div>
   );
 }

@@ -51,9 +51,17 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ us
     return NextResponse.json({ error: "no_changes" }, { status: 400 });
   }
 
-  const admin = createAdminClient();
-  const { error } = await admin.from("profiles").update(patch).eq("id", userId);
-  if (error) return NextResponse.json({ error: "update_failed" }, { status: 500 });
-
-  return NextResponse.json({ ok: true });
+  try {
+    const admin = createAdminClient();
+    const { error } = await admin.from("profiles").update(patch).eq("id", userId);
+    if (error) {
+      console.error("[admin/users/:id] update failed:", error.message, error);
+      return NextResponse.json({ error: "update_failed", detail: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    console.error("[admin/users/:id] unexpected error:", detail, err);
+    return NextResponse.json({ error: "update_failed", detail }, { status: 500 });
+  }
 }

@@ -53,28 +53,39 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "weak_password" }, { status: 400 });
   }
 
-  const admin = createAdminClient();
+  try {
+    const admin = createAdminClient();
 
-  const { data: created, error: createError } = await admin.auth.admin.createUser({
-    email,
-    password,
-    email_confirm: true,
-    ...(phone ? { phone_confirm: false } : {}),
-    user_metadata: { full_name: fullName },
-  });
+    const { data: created, error: createError } = await admin.auth.admin.createUser({
+      email,
+      password,
+      email_confirm: true,
+      ...(phone ? { phone_confirm: false } : {}),
+      user_metadata: { full_name: fullName },
+    });
 
-  if (createError || !created.user) {
-    const code = createError?.message?.toLowerCase().includes("already") ? "email_in_use" : "create_failed";
-    return NextResponse.json({ error: code }, { status: 409 });
+    if (createError || !created.user) {
+      console.error("[admin/users] createUser failed:", createError?.message, createError);
+      const code = createError?.message?.toLowerCase().includes("already") ? "email_in_use" : "create_failed";
+      return NextResponse.json({ error: code, detail: createError?.message ?? null }, { status: 409 });
+    }
+
+    const patch: Partial<ProfileRow> = { full_name: fullName, role: newRole, branch_id: branchId };
+    if (phone) patch.phone = phone;
+
+    const { error: profileError } = await admin.from("profiles").update(patch).eq("id", created.user.id);
+    if (profileError) {
+      console.error("[admin/users] profile patch failed:", profileError.message, profileError);
+      return NextResponse.json({ error: "profile_update_failed", detail: profileError.message }, { status: 500 });
+    }
+
+    return NextResponse.json({ id: created.user.id });
+  } catch (err) {
+    // Most common cause: SUPABASE_SERVICE_ROLE_KEY missing/wrong in this
+    // environment's env vars — createAdminClient() throws synchronously
+    // in that case, before any Supabase call is even made.
+    const detail = err instanceof Error ? err.message : String(err);
+    console.error("[admin/users] unexpected error:", detail, err);
+    return NextResponse.json({ error: "create_failed", detail }, { status: 500 });
   }
-
-  const patch: Partial<ProfileRow> = { full_name: fullName, role: newRole, branch_id: branchId };
-  if (phone) patch.phone = phone;
-
-  const { error: profileError } = await admin.from("profiles").update(patch).eq("id", created.user.id);
-  if (profileError) {
-    return NextResponse.json({ error: "profile_update_failed" }, { status: 500 });
-  }
-
-  return NextResponse.json({ id: created.user.id });
 }
